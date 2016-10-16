@@ -1,21 +1,14 @@
-body{
-	background: #eee;
+.btn-dinesh {
+  color: #fff;
+  background-color:#676767;
+  border-color: #2e6da4;
 }
-#heading{
-text-align: center;
-}
-#loginform{
-	border: solid gray 2px;
-	width: 20%;
-	border-radius: 5px;
-	margin: 100px auto;
-	background: white;
-	padding: 50px;
 
+.btn-dinesh:hover{
+	color: #fff !important;
+  background-color:#000 ;
 }
-#button{
-	color: #fff;
-	background: #337ab7;
-	padding: 5px;
-	margin-left: 69%;
+
+.btn-dinesh:active{
+	color: #fff !important;
 }

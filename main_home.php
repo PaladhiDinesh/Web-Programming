@@ -1,34 +1,18 @@
-<?php
-	if(!empty($_POST['username'])){
-		$username = $_POST['username'];	
-		}
-	else{
-		echo "Please enter valid username and password";
-		exit();
-	}
-	if(!empty($_POST['password'])){
-		$password = $_POST['password'];
-		}
-	else{
-		echo "Please enter valid username and password";
-		exit();
-	}
-	$username = stripcslashes($username);
-	$password = stripcslashes($password);
-	$username = mysql_real_escape_string($username);
-	$password = mysql_real_escape_string($password);
+<?php include "session.php"; ?>	
+<?php include "header.php"; ?>
+<?php include "navbar.php"; ?>	
+<?php include "scripts.php"; ?>	
+<h3 align="center">Welcome to Answers Kart</h3>
+<div class="container">
+	<h4>Top Questions</h4>
+</div>
+	<?php 
 
-	mysql_connect("localhost","root","");
-	mysql_select_db("answerskart");
-
-	$result = mysql_query("select * from login_details where admin ='$username' and password = '$password'")
+		$query = "SELECT title FROM questions_table WHERE question_id=1";
+		$result = mysqli_query($connection,$query)
 					or die("Failed to query database".mysql_error());
-	$row = mysql_fetch_array($result);
-	if ($row['admin'] == $username && $row['password'] == $password){
-		echo "Welcome to Answerskart ".$row['admin'];
-
-	}else{
-		echo "Failed to login";
-
-	}
-?>
+		
+		while ($row = mysqli_fetch_array($result)) { ?>
+			<div class="container"><a href='single_question.php'><?php echo $row[0]."<br />";?></a></div>
+		<?php }	?>
+<?php include "footer.php"; ?>	
