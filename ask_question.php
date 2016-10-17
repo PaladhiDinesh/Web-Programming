@@ -5,7 +5,7 @@
 
 			<div class="container">
 <div class="row">
- <div class="col-md-offset-3 col-md-6">
+ <div class="col-md-offset-1 col-md-6">
 		<h3>Ask Your Question</h3><hr/>
 
 <form>

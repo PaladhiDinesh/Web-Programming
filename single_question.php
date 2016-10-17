@@ -15,16 +15,31 @@
 					<?php
 		
 		while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-		echo "Question:"."<br />";
+			?>
+			<p class="lead"		>
+			<?php
+		//echo "Question:"."<br />";
 		echo $row['title']."<br />";
+		?>
+		</p><hr/>
+		<p>
+		<?php
 		echo $row['content']."<br />";
 		echo "Asked by ".$row['admin']." on ".$row['created_at']."<br />"."<br />";
 			}	
-
+			?></p><hr/>
+<?php
 		while ($row1 = mysqli_fetch_array($answerresult,MYSQLI_ASSOC)) {
+			?>
+			<p>
+			<?php
 		echo "Answer:"."<br />";
 		echo $row1['answer']."<br />";
-		echo "Answered by ".$row1['admin']. " on ".$row1['created_at']."<br />"."<br />";	
+		echo "Answered by ".$row1['admin']. " on ".$row1['created_at']."<br />"."<br />";
+		?>
+		</p><hr/>
+		
+		<?php	
 			}	
 
 
