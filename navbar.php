@@ -14,17 +14,13 @@
 				        <li><a href="my_questions.php">My Questions</a></li>
 				    
 				      </ul>
-				      <form class="navbar-form navbar-left">	
-				        <div class="form-group">
-				          <input type="text" class="form-control" placeholder="Search">
-				        </div>
-				        <button type="submit" class="btn btn-default">Submit</button>
-				      </form>
+				      
 				      <ul class="nav navbar-nav navbar-right">
-				       <li><a href="#">Contact Us</a></li>
+				      
 				       <?php
-				        if ($USERID)
+				        if ($USERID != "undefined")
 							{ ?>
+								<li><a style="color: white" href="#"><?php echo $USERNAME;?></a></li>
 								<li><a href="logout.php">Log out</a></li>
 							<?php
 							}

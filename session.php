@@ -8,9 +8,11 @@
 
 	{
 		$USERID=$_SESSION['login_user'];
+		$USERNAME=$_SESSION['login_name'];
 	}
 	else
 	{
+		$USERID='undefined';
 	}
 
 	?>	
