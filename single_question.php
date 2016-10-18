@@ -32,8 +32,12 @@
 	?></p><hr/>
 	<?php
 		echo $row['content']."<br />";
-		echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />"
 	?>
+	<p>
+		<b><?php echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />"
+			?> 
+		</b>
+	</p>
 	<h4> Answers </h4><hr/>
 	<?php
 		while ($row1 = mysqli_fetch_array($answerresult,MYSQLI_ASSOC)) {?>
@@ -61,8 +65,12 @@
 					<input class="answer_id" type="hidden" value=<?php echo $row1['answer_id']?>>
 					<?php
 						echo $row1['answer']."<br />";
-						echo "Answered by ".htmlentities($row1['admin']). " on ".htmlentities($row1['created_at']);	
 					?>
+					<p>
+						<b><?php echo "Answered by ".htmlentities($row1['admin']). " on ".htmlentities($row1['created_at']);	
+							?>
+						</b>
+					</p>
 				</div>
 			</div>
 		<hr/>
