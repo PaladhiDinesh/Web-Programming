@@ -1,3 +1,4 @@
+<?php include "header.php"; ?>
 <?php
 session_start();
 if(session_destroy())
@@ -6,12 +7,7 @@ if(session_destroy())
 }
 ?>
 <?php include "session.php"; 
-?>
-<html>
-<head>
-  <link rel="stylesheet" href="loginstyle.css">
-</head>	
-</html>	
+?>	
 <?php
 	
 	$Invalid = "";
@@ -58,7 +54,7 @@ mysqli_close($connection);
           <h1 class="text-center">Login</h1>
       </div>
       <div class="modal-body">
-          <form class="form col-md-12 center-block" method="post" action="">
+          <form class="form col-md-12 center-block" method="post">
             <div class="form-group">
               <input type="text" class="form-control input-lg" placeholder="Email" name="username" id ="username">
               <p id="usernameerror"></p>
