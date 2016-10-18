@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2016 at 12:09 AM
+-- Generation Time: Oct 18, 2016 at 01:02 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `answerskart`
 --
+CREATE DATABASE IF NOT EXISTS `answerskart` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `answerskart`;
 
 -- --------------------------------------------------------
 
