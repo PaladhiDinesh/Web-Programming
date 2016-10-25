@@ -4,35 +4,43 @@
 	if ($USERID != 'undefined'){
 		header('Location:main_home.php');
 	}
-	$Invalid =" ";
+	$flag='';
 	if (isset($_POST['submit']) && !empty($_POST['username']) && !empty($_POST['password'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$username = mysqli_real_escape_string($connection,$username);
 		$password = mysqli_real_escape_string($connection,$password);	
-		$query = "SELECT * from login_details where admin='$username' and password='$password'";
-		$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
-		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-		if ($result->num_rows > 0){
-			$_SESSION['login_user']=$row['user_id'];
-			$_SESSION['login_name']=$row['admin'];
-			header('Location:main_home.php');
+		$queryall = "SELECT * from login_details where admin='$username'";
+		$query = "INSERT INTO login_details(`admin`, `password`) VALUES ('$username','$password')";
+		$resultall = mysqli_query($connection,$queryall) or die("Failed to query database".mysql_error());
+		if($resultall->num_rows != 0)
+		{
+			$flag= "username already exists! Please use other Username";
 		}
 		else{
- 			$Invalid= "Invalid username or password!"; 
- 		}
-		mysqli_close($connection);
-	}
-?>
+			$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
+		#	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			if($result){
+				$last_id = mysqli_insert_id($connection);?>
+				<script type="text/javascript">
+ 					alert('Successfully Registered !! Please Login');
+ 				</script>
+ 				<?php
+			#	header('Location:login.php');
+			}
+		}
+			mysqli_close($connection);
+		}
+	?>
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>
-<title>ANSWERSKART- Login Page</title>
+<title>ANSWERSKART- Sign-Up Page</title>
 <img src="questions.jpg" style="width:1300px;height: 500px">
 <div style="margin-top:100px;" id="loginModal" class="modal show col-xs-offset-7 col-md-5" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
   		<div class="modal-content">
       		<div class="modal-header">
-          		<h1 class="text-center">Login</h1>
+          		<h1 class="text-center">Sign-Up</h1>
       		</div>
       		<div class="modal-body">
           		<form class="form col-md-12 center-block" method="post" accept-charset='UTF-8'>
@@ -45,13 +53,8 @@
               			<p id="passworderror"></p>
             		</div>
             		<div class="form-group">
-              			<button id="submit" class="btn btn-dinesh btn-lg btn-block" name ="submit">Sign In</button>
-              			<?php 
-              				echo "Not registered Yet ? Register Here "; 
-              			?> 
-              			<a href="signup.php">Sign Up</a>
-              			<?php
-              			echo $Invalid ?>
+              			<button id="submit" class="btn btn-dinesh btn-lg btn-block" name ="submit">Sign Up</button>
+              			<?php echo $flag; ?>
             		</div>
           		</form>
       		</div>
@@ -59,24 +62,5 @@
  		</div>
   	</div>
 </div>
-
-			<!-- Latest compiled and minified JavaScript -->
-<?php include "scripts.php"; ?>	
-<script type="text/javascript">
-	 $('#submit').click(function(e) {
-	 	var user = document.getElementById("username").value;
-		var pass = document.getElementById("password").value;
-		if (user == '')
-		{
-	 		e.preventDefault();	
-			$('#usernameerror').html("Enter Username");
-		}
-		else if (pass =='')
-		{
-	 		e.preventDefault();
-			$('#usernameerror').html(""); 		
-			$('#passworderror').html("Enter Password")
-		}	
-	 });
-</script>
+<?php include "scripts.php"; ?>
 <?php include "footer.php"; ?>	

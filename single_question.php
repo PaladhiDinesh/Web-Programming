@@ -14,7 +14,7 @@
 		}
 	}
 	$query = "SELECT questions_table.user_id,title,admin,content,questions_table.created_at FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
-	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id=".$_GET['ques_id'];
+	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id=".$_GET['ques_id']." ORDER BY marks DESC";
 	$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
 	$new=$result->num_rows;
 	if ($new==0){

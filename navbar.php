@@ -10,6 +10,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="ask_question.php">Ask a Question<span class="sr-only">(current)</span></a></li>
 					<li><a href="my_questions.php">My Questions</a></li>
+					<li><a href="#">Unanswered Questions</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<?php
@@ -22,6 +23,7 @@
 						else{ 
 							?>
 							<li><a href="login.php">Log In</a></li>
+							<li><a href="signup.php">Sign Up</a></li>
 							<?php
 						}
 				       		?>
