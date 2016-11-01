@@ -16,7 +16,8 @@
 					<?php
 				        if ($USERID != "undefined"){ 
 				     ?>
-							<li><a style="color: white" href="#"><?php echo $USERNAME;?></a></li>
+							<li><a style="color: white" href="ProfilePage.php"><img width="25" height="25" src="images/<?php echo $_SESSION['login_name']?>" onerror   ="this.src='images/default.png';">
+                             <?php echo $USERNAME;?></a></li>
 							<li><a href="logout.php">Log out</a></li>
 							<?php
 						}

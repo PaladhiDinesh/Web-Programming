@@ -14,6 +14,8 @@
 					$question_id=htmlentities($row['question_id']);
 			?>
 					<p><a href='single_question.php?ques_id=<?php echo $question_id; ?>'><?php echo htmlentities($row['title']);?></a></p>
+					<img width="20" height="20" src="images/<?php echo $row['admin']?>"
+		                onerror="this.src='images/default.png';" >
 					<?php echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />" ?><hr/>
 				<?php }?>
 <?php include "footer.php"; ?>

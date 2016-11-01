@@ -34,6 +34,8 @@
 		echo $row['content']."<br />";
 	?>
 	<p>
+	    <img width="20" height="20" src="images/<?php echo $row['admin']?>"
+		                onerror="this.src='images/default.png';" >
 		<b><?php echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />"
 			?> 
 		</b>
@@ -67,6 +69,8 @@
 						echo $row1['answer']."<br />";
 					?>
 					<p>
+					<img width="25" height="25" src="images/<?php echo $row1['admin']?>"
+		                onerror="this.src='images/default.png';" >
 						<b><?php echo "Answered by ".htmlentities($row1['admin']). " on ".htmlentities($row1['created_at']);	
 							?>
 						</b>
