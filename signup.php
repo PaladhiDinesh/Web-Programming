@@ -18,6 +18,7 @@
 		if($resultall->num_rows != 0)
 		{
 			$flag= "username already exists! Please use other Username";
+			echo "username already exists! Please use other Username";
 		}
 		else{
 			$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
@@ -32,7 +33,7 @@
 			}
 		}
 			mysqli_close($connection);
-			header('Location:login.php');
+			//header('Location:login.php');
 		}
 	?>
 <?php include "header.php"; ?>
