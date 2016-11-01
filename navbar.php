@@ -16,7 +16,7 @@
 					<?php
 				        if ($USERID != "undefined"){ 
 				     ?>
-							<li><a style="color: white" href="#"><?php echo $USERNAME;?></a></li>
+							<li><a style="color: white" href="profile.php"><?php echo $USERNAME;?></a></li>
 							<li><a href="logout.php">Log out</a></li>
 							<?php
 						}
