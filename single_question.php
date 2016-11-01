@@ -15,8 +15,8 @@
 	}
 	$query = "SELECT questions_table.user_id,title,admin,content,questions_table.created_at,ques_votecount FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
 	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id=".$_GET['ques_id']." ORDER BY marks DESC,ans_votecount DESC";
-	$quesvotequery = "SELECT votes from votes_table WHERE question_id =".$_GET['ques_id']." and user_id=$USERID";
-	$que_vote_result = mysqli_query($connection,$quesvotequery) or die("Failed to query database");
+	$quesvotequery = "SELECT votes from votes_table WHERE question_id =".$_GET['ques_id'];
+	$que_vote_result = mysqli_query($connection,$quesvotequery) or die("Failed to query database".mysql_error());
 	$que_vote_row = mysqli_fetch_array($que_vote_result,MYSQLI_ASSOC);
 
 	

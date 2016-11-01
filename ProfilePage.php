@@ -7,14 +7,19 @@ Welcome to Answers Kart</h1>
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
+		<h2>
+		<?php
+		echo $_GET['name'] 
+		?>
+			
+		</h2>
 		<form method="post" enctype="multipart/form-data">
-		<img width="200" height="200" src="images/<?php echo $_SESSION['login_name']?>"
+		<img width="200" height="200" src="images/<?php echo $_GET['name']?>"
 		onerror="this.src='images/default.png';" >
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Upload Image" name="submit">
 </form>
 			<?php
-				if ($USERID != "undefined"){
 
 /*<img src="programming.gif" alt="userName" style="width:48px;height:48px;">*/
 					if(isset($_POST["submit"])) {
@@ -88,10 +93,8 @@ if ($uploadOk == 0) {
 		 				?><hr/>
 						<?php
 					}
-				}
-				else{
-					header('Location:login.php');
-				}
+				
+		
 						?>
 
 		</div>
