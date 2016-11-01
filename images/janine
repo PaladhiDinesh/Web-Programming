@@ -1,0 +1,12 @@
+import numpy as np
+
+sequence1=['A','T','C','G']
+sequence2=['T','C','G']
+
+length1=len(sequence1)
+length2=len(sequence2)
+
+matrix = np.zeros((length1+1,length2+1))
+
+matrix[2][2]=1
+print matrix.max()

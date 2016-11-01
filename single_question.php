@@ -36,6 +36,7 @@
 		echo htmlentities($row['title'])."<br />"; 
 	?></p></h3><hr/>
 	<?php
+
 	?> 
 	<div class="row">
 		<div class="col-md-12">
@@ -86,13 +87,18 @@
 				?></div>
 				<div class="col-md-3">
 					<p>
-						<b><?php echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />"
-						?> 
+						 <img width="20" height="20" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
+		<b><?php echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />"
+			?> 
+		</b>
+					
 						</b>
 					</p>
 				</div>
 		</div>
 	</div>
+
+	
 	<h4> Answers </h4><hr/>
 
 	<?php
@@ -184,7 +190,10 @@
 					</div>
 					<div class="col-md-3">
 						<p>
-							<b><?php echo "Answered by ".htmlentities($row1['admin']). " on ".htmlentities($row1['created_at']);	
+					<img width="25" height="25" src="images/<?php echo $row1['admin']?>"
+		                onerror="this.src='images/default.png';" >
+						<b><?php echo "Answered by ".htmlentities($row1['admin']). " on ".htmlentities($row1['created_at']);	
+
 							?>
 							</b>
 						</p>
