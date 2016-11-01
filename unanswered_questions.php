@@ -6,9 +6,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Top Questions</h2><hr/>
+			<h2>Unanswered Questions</h2><hr/>
 			<?php 
-				$query = "SELECT title,admin,questions_table.created_at,question_id,ques_votecount FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id ORDER BY ques_votecount DESC";
+				$query = "SELECT title,admin,questions_table.created_at,questions_table.question_id from questions_table LEFT JOIN answers_table ON questions_table.question_id=answers_table.question_id JOIN login_details ON login_details.user_id=questions_table.user_id WHERE questions_table.question_id NOT IN (SELECT question_id from answers_table)";
 				$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
 
 				while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) { 
@@ -16,7 +16,6 @@
 			?>
 			<div class="row">
 				<div class="col-md-6">
-		
 					<p><a href='single_question.php?ques_id=<?php echo $question_id; ?>'><?php echo htmlentities($row['title']);?></a></p>
 				</div>
 				<div class="col-md-6">

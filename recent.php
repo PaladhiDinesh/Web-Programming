@@ -6,15 +6,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Top Questions</h2><hr/>
+			<h2>Recent Questions</h2><hr/>
 			<?php 
-				$query = "SELECT title,admin,questions_table.created_at,question_id,ques_votecount FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id ORDER BY ques_votecount DESC";
+				$query = "SELECT title,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id ORDER BY question_id DESC";
 				$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
-
 				while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) { 
 					$question_id=htmlentities($row['question_id']);
-			?>
-			<div class="row">
+			?>	<div class="row">
 				<div class="col-md-6">
 		
 					<p><a href='single_question.php?ques_id=<?php echo $question_id; ?>'><?php echo htmlentities($row['title']);?></a></p>
