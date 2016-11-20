@@ -2,23 +2,45 @@
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
 <?php include "scripts.php"; ?>
+
 <h1 align="center">
-Welcome to Answers Kart</h1>
-<div class="container">
-	<div class="row">
-		<div class="col-md-6">
-		<h2>
+Welcome to Answers Kart</h1><hr/>
+		<h2 align="center">
 		<?php
 		echo $_GET['name'] 
 		?>
+		Profile Page
 			
 		</h2>
-		<form method="post" enctype="multipart/form-data">
+		<?php 
+$namequery = "SELECT user_id from login_details where admin ='".$_GET['name']."'";
+	$nameresult = mysqli_query($connection,$namequery) or die("Failed to query database 123".mysql_error());
+	$row1 = mysqli_fetch_array($nameresult,MYSQLI_ASSOC);
+	$dummy = $row1['user_id'];
+
+	$query = "SELECT title,admin,question_id,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id where questions_table.user_id='".$dummy."'";
+					$result = mysqli_query($connection,$query) or die(" to query database".mysql_error());
+	
+		?>s
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+
+		<form method="post" enctype="multipart/form-data" align="center">
+		<?php
+		if ($USERID == $dummy){ ?>
+		<h4>Upload a Profile Picture</h4>
+		<?php } ?>
 		<img width="200" height="200" src="images/<?php echo $_GET['name']?>"
 		onerror="this.src='images/default.png';" >
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
+		<?php
+	if ($USERID == $dummy){ ?>
+    <center><input type="file" name="fileToUpload" id="fileToUpload"></center>
+    <input type="submit" value="Upload Image" name="submit"> 
+    <?php } ?>
 </form>
+<h3>Questions Asked by <?php echo $_GET['name']  ?> </h3><hr/>
 			<?php
 
 /*<img src="programming.gif" alt="userName" style="width:48px;height:48px;">*/
@@ -71,29 +93,35 @@ if ($uploadOk == 0) {
 }
 
 
-	$namequery = "SELECT user_id from login_details where admin ='".$_GET['name']."'";
-	$nameresult = mysqli_query($connection,$namequery) or die("Failed to query database 123".mysql_error());
-	$row1 = mysqli_fetch_array($nameresult,MYSQLI_ASSOC);
-	$dummy = $row1['user_id'];
-
-	$query = "SELECT title,admin,question_id,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id where questions_table.user_id='".$dummy."'";
-					$result = mysqli_query($connection,$query) or die(" to query database".mysql_error());
-
+	
 
 					while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 						$question_id=htmlentities($row['question_id']);
-						?><p>	
-						<a href='single_question.php?ques_id=<?php echo $question_id; ?>'><?php echo htmlentities($row['title']);?></a>
-						</p>
-						<img width="25" height="25" src="images/<?php echo $row['admin']?>"
-		                onerror="this.src='images/default.png';" >
-						<?php
-		 				echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />";
-				
-		 				?><hr/>
+						?>
+						<div class="row">
+						<div class="col-md-6">
+							<p>
+								<a href='single_question.php?ques_id=<?php echo $question_id; ?>'><?php echo htmlentities($row['title']);?></a>
+							</p>
+						</div>
+						<div class="col-md-6">
+							<p>
+								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
+									<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
+								</a>
+								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
+									<?php 
+										echo " on ".htmlentities($row['created_at'])."<br />"?> 
+								</b>
+							</p>
+						</div>
+						<div class="col-md-12">
+							<div class="row"><hr/></div>
+						</div>
+					</div>
+		 				
 						<?php
 					}
-				
 		
 						?>
 

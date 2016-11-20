@@ -39,7 +39,7 @@
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>
 <title>ANSWERSKART- Sign-Up Page</title>
-<img src="questions.jpg" style="width:1300px;height: 500px">
+<img src="download.jpg" style="width:1600px;height: 623px">
 <div style="margin-top:100px;" id="loginModal" class="modal show col-xs-offset-7 col-md-5" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
   		<div class="modal-content">

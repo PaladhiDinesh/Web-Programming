@@ -19,8 +19,15 @@
 					<p><a href='single_question.php?ques_id=<?php echo $question_id; ?>'><?php echo htmlentities($row['title']);?></a></p>
 				</div>
 				<div class="col-md-6">
-
-					<?php echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />" ?>
+							<p>
+								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
+									<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
+								</a>
+								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
+									<?php 
+										echo " on ".htmlentities($row['created_at'])."<br />"?> 
+								</b>
+							</p>
 				</div>
 				<div class="col-md-12">
 				<div class="row"><hr/></div>

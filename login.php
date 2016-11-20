@@ -27,8 +27,8 @@
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>
 <title>ANSWERSKART- Login Page</title>
-<img src="questions.jpg" style="width:1300px;height: 500px">
-<div style="margin-top:100px;" id="loginModal" class="modal show col-xs-offset-7 col-md-5" tabindex="-1" role="dialog" aria-hidden="true">
+<img src="download.jpg" style="width:1600px;height: 623px">
+<div style="margin-top:100px;" id="loginModal" class="modal show col-xs-offset-7 col-md-5" tabindex="-1" role="dialog" aria-hidden="true" align="center">
 	<div class="modal-dialog">
   		<div class="modal-content">
       		<div class="modal-header">
@@ -46,10 +46,11 @@
             		</div>
             		<div class="form-group">
               			<button id="submit" class="btn btn-dinesh btn-lg btn-block" name ="submit">Sign In</button>
+              			<h4>
               			<?php 
               				echo "Not registered Yet ? Register Here "; 
               			?> 
-              			<a href="signup.php">Sign Up</a>
+              			<a href="signup.php">Sign Up</a></h4>
               			<?php
               			echo $Invalid ?>
             		</div>

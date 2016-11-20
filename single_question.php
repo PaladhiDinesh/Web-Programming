@@ -15,12 +15,12 @@
 	}
 	$query = "SELECT questions_table.user_id,title,admin,content,questions_table.created_at,ques_votecount FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
 	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id=".$_GET['ques_id']." ORDER BY marks DESC,ans_votecount DESC";
-	$quesvotequery = "SELECT votes from votes_table WHERE question_id =".$_GET['ques_id'];
-	$que_vote_result = mysqli_query($connection,$quesvotequery) or die("Failed to query database".mysql_error());
+	$quesvotequery = "SELECT votes from votes_table WHERE answer_id=0 and question_id =".$_GET['ques_id'];
+	$que_vote_result = mysqli_query($connection,$quesvotequery) or die("Failed to query database 12".mysql_error());
 	$que_vote_row = mysqli_fetch_array($que_vote_result,MYSQLI_ASSOC);
 
 	
-	$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
+	$result = mysqli_query($connection,$query) or die("Failed to query database 123".mysql_error());
 	$new=$result->num_rows;
 	if ($new==0){
 		header('Location:404error.php');
@@ -87,11 +87,12 @@
 				?></div>
 				<div class="col-md-3">
 					<p>
-						 <img width="20" height="20" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
-		<b><?php echo "Asked by ".htmlentities($row['admin'])." on ".htmlentities($row['created_at'])."<br />"
-			?> 
-		</b>
-					
+						<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
+						<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
+						</a>
+						<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
+						<?php 
+						echo " on ".htmlentities($row['created_at'])."<br />"?> 
 						</b>
 					</p>
 				</div>
@@ -104,23 +105,50 @@
 	<?php
 		while ($row1 = mysqli_fetch_array($answerresult,MYSQLI_ASSOC)) {
 			//echo $row1['answer_id'];
-			$ansvotequery = "SELECT votes from votes_table WHERE answer_id =".$row1['answer_id']." and user_id=$USERID and question_id =".$_GET['ques_id'];
-			$ans_vote_result = mysqli_query($connection,$ansvotequery) or die("Failed to query database");
+			$ansvotequery = "SELECT votes from votes_table WHERE answer_id =".$row1['answer_id']." and question_id =".$_GET['ques_id'];
+			$ans_vote_result = mysqli_query($connection,$ansvotequery) or die("Failed to query database hi");
 			$ans_vote_row = mysqli_fetch_array($ans_vote_result,MYSQLI_ASSOC);
 			//echo $ans_vote_row['votes'],"hi",$row1['answer_id'];
 			?>
 			<div class='row'>
 				<div class="col-md-12"> 
-				<?php 
-					if ($USERID != "undefined"){
-				?>
 					<div class="col-md-1 mark_container">
+						<?php
+					
+					if ($user_id==$USERID){
+						if($row1['marks']==1) {
+							?>
+							
+									<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #006400 ;cursor: pointer"></i>
+							<?php 
+						}else{ 
+							?>
+						
+									<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #D3D3D3; cursor:pointer"></i>
+						
+							<?php 
+						}
+					}else{
+						if($row1['marks']==1){
+							?> 	
+							
+									<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #006400"></i>
+								
+				
+
+							<?php 
+						}
+						}
+
+						?>
+
+
 							<?php if($ans_vote_row['votes']==1 ) { ?>
 
 								<div class="row ans_like_container" >								
 									<i class="ans_votes_count_up fa fa-thumbs-o-up" aria-hidden="true" style="font-size: 30px;color : #006400 ;cursor: pointer;"></i></div>
 									<div class="row ans_vote_value">
-										<p><h4><b><?php echo $row1['ans_votecount'] ?> </b></h4></p>
+										<p><h4><b id="ans_likes_count"><?php echo $row1['ans_votecount'] ?> </b></h4></p>
 									</div>
 								<div class ="row ans_like_container">
 									<i class="ans_votes_count_down fa fa-thumbs-o-down" aria-hidden="true" style="font-size: 30px;color : #D3D3D3 ;cursor: pointer;"></i></div>	
@@ -129,7 +157,7 @@
 								<div class="row ans_like_container" >								
 									<i class="ans_votes_count_up fa fa-thumbs-o-up" aria-hidden="true" style="font-size: 30px;color : #D3D3D3 ;cursor: pointer;"></i></div>
 									<div class="row ans_vote_value">
-										<p><h4><b><?php echo $row1['ans_votecount'] ?> </b></h4></p>
+										<p><h4><b id="ans_likes_count"><?php echo $row1['ans_votecount'] ?> </b></h4></p>
 									</div>
 								<div class ="row ans_like_container">
 									<i class="ans_votes_count_down fa fa-thumbs-o-down" aria-hidden="true" style="font-size: 30px;color : #D3D3D3 ;cursor: pointer;"></i></div>	
@@ -137,49 +165,19 @@
 							<div class="row ans_like_container" >								
 									<i class="ans_votes_count_up fa fa-thumbs-o-up" aria-hidden="true" style="font-size: 30px;color : #D3D3D3 ;cursor: pointer;"></i></div>
 									<div class="row ans_vote_value">
-										<p><h4><b><?php echo $row1['ans_votecount'] ?> </b></h4></p>
+										<p><h4><b id="ans_likes_count"><?php echo $row1['ans_votecount'] ?> </b></h4></p>
 									</div>
 								<div class ="row ans_like_container">
 									<i class="ans_votes_count_down fa fa-thumbs-o-down" aria-hidden="true" style="font-size: 30px;color : #FF0000 ;cursor: pointer;"></i></div>	
 									<?php
 
 							}
+							?> </div> <?php
 
 							?>
 									
-					<?php
-					}
-					if ($user_id==$USERID){
-						if($row1['marks']==1) {
-							?>
-							<div class="row ">	
-								
-								<div class="row ">		
-									<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #006400 ;cursor: pointer"></i></div>
-							</div>
-							<?php 
-						}else{ 
-							?>
-							<div class="row ">	
-								<div class="row ">
-									<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #D3D3D3; cursor:pointer"></i></div>
-							</div>
-							<?php 
-						}
-					}else{
-						if($row1['marks']==1){
-							?> 	
-							<div class="row ">	
-								<div class="row ">
-									<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #006400"></i>
-								</div>
-							</div>
-
-							<?php 
-						}
-						}
-						?>
-					</div> 
+					
+					
 					<input class="answer_id" type="hidden" value=<?php echo $row1['answer_id']?>>
 					<div class="col-md-8">
 						<?php
@@ -188,14 +186,17 @@
 
 						?>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<p>
-					<img width="25" height="25" src="images/<?php echo $row1['admin']?>"
-		                onerror="this.src='images/default.png';" >
-						<b><?php echo "Answered by ".htmlentities($row1['admin']). " on ".htmlentities($row1['created_at']);	
+				
 
-							?>
-							</b>
+								<a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>">
+						<img width="25" height="25" src="images/<?php echo $row1['admin']?>" onerror="this.src='images/default.png';" >
+						</a>
+						<b><?php echo "Answered by ";?><a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>"> <?php echo htmlentities($row1['admin']) ?></a>
+						<?php 
+						echo " on ".htmlentities($row1['created_at'])."<br />"?> 
+						</b>
 						</p>
 					</div>
 	</div>
@@ -228,7 +229,6 @@
  		}
 			?>
 	</form>
-
 </div>
 <script>
     $(document).ready(function() {
@@ -250,73 +250,107 @@
     	});
 		$('.ans_votes_count_up').click(function(){
 			var user_id = <?php echo $USERID;?>;
+			if(user_id != undefined){
 				var _this=this;
-				console.log($(_this).parents('.mark_container').siblings('.answer_id').val());
-				console.log($(_this).parents('.ans_like_container').siblings('.ans_vote_value').val());
+				// console.log($(_this).parents('.mark_container').siblings('.answer_id').val());
+				// console.log($(_this).parents('.ans_like_container').siblings('.ans_vote_value').val());
+				// console.log($(_this).parents('.ans_like_container').siblings('.ans_vote_value').children('h4').children('#ans_likes_count').html);
 				$.post('ans_voteajax.php', {'ans_id': $(_this).parents('.mark_container').siblings('.answer_id').val(),'ques_id':<?php echo $_GET['ques_id'];?>,'user_id':<?php echo $USERID;?>,'vote_value':1}, function(response) {
 	    			response = $.trim(response);	
-    			if(response != 'false') {
-	    			$(_this).css('color', 'green');
-	    			var votes_value = parseInt($('#ans_likes_count').text()) + 1;
-	    			$('#ans_likes_count').text(votes_value);
+    			if(response == 'false') {
+	    			
+	    			// var votes_value = parseInt($('#ans_likes_count').text()) + 1;
+	    			// $('#ans_likes_count').text(votes_value);
     			}
 	    			else {
+	    				// console.log(response);
+	    				// console.log($(_this).parents('.ans_like_container').siblings('.ans_vote_value').children('.ans_likes_count').val())
+	    				$(_this).parents('.ans_like_container').siblings('.ans_vote_value').children('h4').children('#ans_likes_count').text(response);
+	    				// $($(_this).parents('.ans_like_container').siblings('.ans_vote_value').children('.ans_likes_count').text(response);s
+	    				// $('#ans_likes_count').text(response);
+	    				$(_this).css('color', 'green');
+
 	    			}
-			});
-				
+				});
+			}
 		});
 
 
 	$(".ques_votes_count_up").click(function(){
 		var user_id = <?php echo $USERID;?>;
+		// console.log(user_id);
+		if(user_id !== undefined ){
+			// console.log("hello");
 			var _this=this;
 			$.post('ques_voteajax.php', {'ans_id':0,'ques_id':<?php echo $_GET['ques_id'];?>,'user_id':<?php echo $USERID;?>,'vote_value':1}, function(response) {
-    			response = $.trim(response);	
-    			if(response != 'false') {
-    				$('.ques_votes_count_down').css('color', '#D3D3D3');
-	    			$(_this).css('color', 'green');
-	    			var votes_value = parseInt($('#ques_likes_count').text()) + 1;
-	    			$('#ques_likes_count').text(votes_value);
+    			response = $.trim(response);
+    			console.log(response);	
+    			if(response == 'false') {
+
+	    			
+	    			// var votes_value = parseInt($('#ques_likes_count').text()) + 1;
+	    			
+	    			
     			}
     			else {
+    				$('.ques_votes_count_down').css('color', '#D3D3D3');
+	    			$(_this).css('color', 'green');
+    				console.log(response);
+    				$('#ques_likes_count').text(response);
+    				
     			}
 		});
+		}
 			
 	});
 
 		$('.ans_votes_count_down').click(function(){
 			var user_id = <?php echo $USERID;?>;
+			if(user_id != undefined){
 				var _this=this;
 				console.log($(_this).parents('.ans_like_container').siblings('.ans_vote_value').val());
 				$.post('ans_voteajax.php', {'ans_id': $(_this).parents('.mark_container').siblings('.answer_id').val(),'ques_id':<?php echo $_GET['ques_id'];?>,'user_id':<?php echo $USERID;?>,'vote_value':-1}, function(response) {
 	    			response = $.trim(response);	
-    			if(response != 'false') {
-	    			$(_this).css('color', 'red');
-	    			var votes_value = parseInt($('#ans_likes_count').text()) - 1;
-	    			$('#ans_likes_count').text(votes_value);
+    			if(response == 'false') {
+	    			
+	    			// var votes_value = parseInt($('#ans_likes_count').text()) - 1;
+	    			// $('#ans_likes_count').text(votes_value);
+
     			}
 	    			else {
+	    				// console.log(response);
+	    				// console.log(response);
+	    				$(_this).parents('.ans_like_container').siblings('.ans_vote_value').children('h4').children('#ans_likes_count').text(response);
+	    				// $('#ans_likes_count').text(response);
+	    				$(_this).css('color', 'red');
 	    			}
-			});
-				
+				});
+			}	
 		});
 
 
 	$(".ques_votes_count_down").click(function(){
 		var user_id = <?php echo $USERID;?>;
+		if(user_id != undefined){
 			var _this=this;
 			$.post('ques_voteajax.php', {'ans_id':0,'ques_id':<?php echo $_GET['ques_id'];?>,'user_id':<?php echo $USERID;?>,'vote_value':-1}, function(response) {
 				response = $.trim(response);	
-    			if(response != 'false') {
-    				$('.ques_votes_count_up').css('color', '#D3D3D3');
-    				$(_this).css('color', 'red');
-    				var votes_value = parseInt($('#ques_likes_count').text()) - 1;
-	    			$('#ques_likes_count').text(votes_value);	    				
+    			if(response == 'false') {
+
+    				console.log(response);
+    				
+    				// var votes_value = parseInt($('#ques_likes_count').text()) - 1;
+	    			// $('#ques_likes_count').text(votes_value);	    				
     			}
     			else {
+    				$('.ques_votes_count_up').css('color', '#D3D3D3');
+    				$(_this).css('color', 'red');
+    				$('#ques_likes_count').text(response);
+    				console.log(response);
+    				
     			}
-		});
-			
+			});
+		}
 	});
 	$('#summernote').summernote({
 		  	height: 200,                 // set editor height

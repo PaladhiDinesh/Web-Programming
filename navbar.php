@@ -1,4 +1,4 @@
-<header class="navbar navbar-inverse" role="banner">
+<header class="navbar navbar-inverse" >
 	<div class="container-fluid ">
 		<nav role ="navigation"> 
 				    <!-- Brand and toggle get grouped for better mobile display -->
@@ -11,7 +11,7 @@
 					<li><a href="ask_question.php">Ask a Question<span class="sr-only">(current)</span></a></li>
 					<li><a href="my_questions.php">My Questions</a></li>
 					<li><a href="unanswered_questions.php">Unanswered Questions</a></li>
-					<li><a href="#">My Answered Questions</a></li>
+					<!-- <li><a href="#">My Answered Questions</a></li> -->
 					<li><a href="recent.php">Recent Questions</a></li>
 					<li><a href="help.php">Help Page</a></li>
 				</ul>

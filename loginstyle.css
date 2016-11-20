@@ -11,3 +11,6 @@
 .btn-dinesh:active{
 	color: #fff !important;
 }
+header.navbar.navbar-inverse{
+	margin-bottom: 0px;
+}
