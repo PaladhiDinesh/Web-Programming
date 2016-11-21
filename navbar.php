@@ -13,8 +13,9 @@
 					<li><a href="unanswered_questions.php">Unanswered Questions</a></li>
 					<!-- <li><a href="#">My Answered Questions</a></li> -->
 					<li><a href="recent.php">Recent Questions</a></li>
-					<li><a href="help.php">Help Page</a></li>
-				</ul>
+					<li><a href="help.php">Help Page</a></li></br>
+					<li><a href="Question_panel.php">Question_panel</a></li>
+					</ul>
 				<form class="navbar-form navbar-left">
      			  	<div class="form-group">
         				<input type="text" class="form-control" placeholder="Search">
