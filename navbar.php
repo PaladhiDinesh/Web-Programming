@@ -12,9 +12,10 @@
 					<li><a href="my_questions.php?page=1">My Questions</a></li>
 					<li><a href="unanswered_questions.php?page=1">Unanswered Questions</a></li>
 					<!-- <li><a href="#">My Answered Questions</a></li> -->
-					<li><a href="recent.php?page=1">Recent Questions</a></li>
-					<li><a href="help.php">Help Page</a></li>
-				</ul>
+					<li><a href="recent.php">Recent Questions</a></li>
+					<li><a href="help.php">Help Page</a></li></br>
+					<li><a href="Question_panel.php">Question_panel</a></li>
+					</ul>
 				<form class="navbar-form navbar-left">
      			  	<div class="form-group">
         				<input type="text" class="form-control" name="name" id="name" placeholder="User Search">
