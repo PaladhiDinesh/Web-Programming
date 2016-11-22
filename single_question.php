@@ -14,18 +14,52 @@
 		}
 	}
 	$query = "SELECT questions_table.user_id,title,admin,content,questions_table.created_at,ques_votecount FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
-	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id=".$_GET['ques_id']." ORDER BY marks DESC,ans_votecount DESC";
-	$quesvotequery = "SELECT votes from votes_table WHERE answer_id=0 and question_id =".$_GET['ques_id'];
-	$que_vote_result = mysqli_query($connection,$quesvotequery) or die("Failed to query database 12".mysql_error());
+	// print_r($query);
+	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id='".$_GET['ques_id']."' ORDER BY marks DESC,ans_votecount DESC";
+
+	$answerresult = mysqli_query($connection,$answerquery) or die("Failed to query database56".mysql_error());
+	// print_r($answerquery);
+	$count=$answerresult->num_rows;
+	$totalpages=ceil($count/5);	
+		if ($totalpages==0){
+			$totalpages=1;
+		}
+
+	// echo $totalpages;
+		if (!isset($_GET['page'])){
+			$_GET['page']=0;
+		}
+		else{
+			$_GET['page']=(int)$_GET['page'];
+		}
+
+		if($_GET['page']<1){
+			$_GET['page']=1;
+		}
+		elseif ($_GET['page'] > $totalpages) {
+			$_GET['page']=$totalpages;
+		}
+
+
+	$startArticle = ($_GET['page'] - 1) * 5;
+
+	$pagination= "SELECT answers_table.user_id as a_user,answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id='".$_GET['ques_id']."' ORDER BY marks DESC,ans_votecount DESC limit ".$startArticle.','.'5';
+	$page_result = mysqli_query($connection,$pagination) or die ("Failed to query database12".mysql_error());
+
+
+
+
+	$quesvotequery = "SELECT votes from votes_table WHERE answer_id=0 and question_id ='".$_GET['ques_id']."'";
+	$que_vote_result = mysqli_query($connection,$quesvotequery) or die("Failed to query database34".mysql_error());
 	$que_vote_row = mysqli_fetch_array($que_vote_result,MYSQLI_ASSOC);
 
 	
-	$result = mysqli_query($connection,$query) or die("Failed to query database 123".mysql_error());
+	$result = mysqli_query($connection,$query) or die("Failed to query database8".mysql_error());
 	$new=$result->num_rows;
 	if ($new==0){
 		header('Location:404error.php');
 	}
-	$answerresult = mysqli_query($connection,$answerquery) or die("Failed to query database".mysql_error());
+	
 ?>	
 <div class="container">
 	<?php
@@ -92,7 +126,7 @@
 						</a>
 						<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
 						<?php 
-						echo " on ".htmlentities($row['created_at'])."<br />"?> 
+						echo '(',scores($row['user_id']),')'," on ".htmlentities($row['created_at'])."<br />"?> 
 						</b>
 					</p>
 				</div>
@@ -103,9 +137,9 @@
 	<h4> Answers </h4><hr/>
 
 	<?php
-		while ($row1 = mysqli_fetch_array($answerresult,MYSQLI_ASSOC)) {
+		while ($row1 = mysqli_fetch_array($page_result,MYSQLI_ASSOC)) {
 			//echo $row1['answer_id'];
-			$ansvotequery = "SELECT votes from votes_table WHERE answer_id =".$row1['answer_id']." and question_id =".$_GET['ques_id'];
+			$ansvotequery = "SELECT votes from votes_table WHERE answer_id =".$row1['answer_id']." and question_id ='".$_GET['ques_id']."'";
 			$ans_vote_result = mysqli_query($connection,$ansvotequery) or die("Failed to query database hi");
 			$ans_vote_row = mysqli_fetch_array($ans_vote_result,MYSQLI_ASSOC);
 			//echo $ans_vote_row['votes'],"hi",$row1['answer_id'];
@@ -195,7 +229,7 @@
 						</a>
 						<b><?php echo "Answered by ";?><a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>"> <?php echo htmlentities($row1['admin']) ?></a>
 						<?php 
-						echo " on ".htmlentities($row1['created_at'])."<br />"?> 
+						echo '(',scores($row1['a_user']),')'," on ".htmlentities($row1['created_at'])."<br />"?> 
 						</b>
 						</p>
 					</div>
@@ -227,6 +261,20 @@
  	    	</div>
  			<?php
  		}
+
+ 		?> 
+					<center><ul class="pagination">
+					<?php
+					foreach (range(1,$totalpages) as $page){
+						// echo $page;
+						// echo "hi";
+						if($page == $_GET['page']){
+        					echo '<li><a class="active"><span class="currentpage">' . $page . '</span></a></li>';
+        					// echo  "current";
+    					}else if($page ==1 || $page ==$totalpages ||($page >= $_GET['page'] -2 && $page <= $_GET['page']+2)){
+							 echo '<li><a href="?page=' . $page . '">' . $page . '</a></li>'; 
+						}
+					}
 			?>
 	</form>
 </div>
@@ -360,4 +408,5 @@
 		});
 	});
 </script>
+
 <?php include "footer.php"; ?>	

@@ -15,10 +15,16 @@ Welcome to Answers Kart</h1><hr/>
 		<?php 
 $namequery = "SELECT user_id from login_details where admin ='".$_GET['name']."'";
 	$nameresult = mysqli_query($connection,$namequery) or die("Failed to query database 123".mysql_error());
+	$new=$nameresult->num_rows;
+	if ($new==0){
+		header('Location:404error.php');
+	}
+	
 	$row1 = mysqli_fetch_array($nameresult,MYSQLI_ASSOC);
+
 	$dummy = $row1['user_id'];
 
-	$query = "SELECT title,admin,question_id,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id where questions_table.user_id='".$dummy."'";
+	$query = "SELECT questions_table.user_id as quser,title,admin,question_id,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id where questions_table.user_id='".$dummy."'";
 					$result = mysqli_query($connection,$query) or die(" to query database".mysql_error());
 	
 		?>s
@@ -111,7 +117,7 @@ if ($uploadOk == 0) {
 								</a>
 								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
 									<?php 
-										echo " on ".htmlentities($row['created_at'])."<br />"?> 
+										echo '(',scores($row['quser']),')'," on ".htmlentities($row['created_at'])."<br />"?> 
 								</b>
 							</p>
 						</div>
