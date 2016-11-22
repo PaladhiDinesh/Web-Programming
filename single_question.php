@@ -326,7 +326,7 @@
         					echo '<li><a class="active"><span class="currentpage">' . $page . '</span></a></li>';
         					// echo  "current";
     					}else if($page ==1 || $page ==$totalpages ||($page >= $_GET['page'] -2 && $page <= $_GET['page']+2)){
-							 echo '<li><a href="?page=' . $page . '">' . $page . '</a></li>'; 
+							 echo '<li><a href="?ques_id='.$_GET['ques_id'].'&page=' . $page . '">' . $page . '</a></li>'; 
 						}
 					}
 			?>
