@@ -2,16 +2,15 @@
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
 <?php include "scripts.php"; ?>
+
 <?php
 	if ($USERID != "undefined"){
 		if (isset($_POST['submit'])){
 			$title = $_POST['title'];
-			$tags = $_POST['tags'];
 			$summernote = trim($_POST['summernote']);
 			$title = mysqli_real_escape_string($connection,$title);
-			$tags = mysqli_real_escape_string($connection,$tags);
 			$summernote = mysqli_real_escape_string($connection,$summernote);
-			$query = "INSERT INTO questions_table(user_id,title,content,tags) VALUES ('$USERID','$title','$summernote','$tags')";
+			$query = "INSERT INTO questions_table(user_id,title,content) VALUES ('$USERID','$title','$summernote')";
 			$result = mysqli_query($connection,$query)or die("Failed to query database".mysql_error());
 			if($result){
 				$last_id = mysqli_insert_id($connection);
@@ -21,6 +20,44 @@
 		}
 ?>
 <div class="container">
+<?php
+ 
+ if ($useradmin==1){
+ 	?>
+ 	<div class="row">
+ 	<br>
+ 	</div>
+ 	<div class="row">
+ 	  <div class="col-md-2">
+  <form action="main_home.php" method="post">
+    <button type="submit" class="btn btn-danger">Top Questions</button>
+  </form>
+  </div>
+<div class="col-md-2">
+ <form action="questions_panel.php" method="post">
+ <button type="submit" class="btn btn-success">Questions Panel</button>
+ </form>
+ </div>
+ <div class="col-md-2">
+  <form action="users_page.php?page=1" method="post">
+  <button type="submit" class="btn btn-info">Users Panel</button>
+  </form>
+  </div>
+
+ 
+</div>
+
+
+
+ 	<?php
+
+
+ }
+else
+{
+	 header('Location: 404error.php');
+}
+?>
 	<div class="row">
  		<div class="col-md-offset-1 col-md-6">
 			<h3>Ask Your Question</h3><hr/>
@@ -29,9 +66,6 @@
         			<input type="text" id="title" name='title' class="form-control input-lg" placeholder="Title" required />
     			</div>
     			<textarea id="summernote" name="summernote" required>Post your question here</textarea>    		
-    			<div class="col-md-3">
-        			<input type="text" id="tags" name='tags'  class="form-control" placeholder="Tags" required />
-    			</div>
    				<?php 
    				if ($USERID != "undefined"){?>
 					<div>
@@ -55,9 +89,10 @@
 <script>
 	$(document).ready(function() {
 		$('#summernote').summernote({
-  			height: 200,                 // set editor height
+  			height: 300,
+  			width: 900,                 // set editor height
   			minHeight: 100,             // set minimum height of editor
-  			maxHeight: 300,             // set maximum height of editor
+  			maxHeight: 600,             // set maximum height of editor
   			focus: true                // set focus to editable area after initializing summernote
 		});
     });

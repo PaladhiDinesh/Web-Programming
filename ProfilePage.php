@@ -13,7 +13,7 @@ Welcome to Answers Kart</h1><hr/>
 			
 		</h2>
 		<?php 
-$namequery = "SELECT user_id from login_details where admin ='".$_GET['name']."'";
+	$namequery = "SELECT user_id from login_details where admin ='".$_GET['name']."'";
 	$nameresult = mysqli_query($connection,$namequery) or die("Failed to query database 123".mysql_error());
 	$new=$nameresult->num_rows;
 	if ($new==0){
@@ -23,13 +23,68 @@ $namequery = "SELECT user_id from login_details where admin ='".$_GET['name']."'
 	$row1 = mysqli_fetch_array($nameresult,MYSQLI_ASSOC);
 
 	$dummy = $row1['user_id'];
-
-	$query = "SELECT questions_table.user_id as quser,title,admin,question_id,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id where questions_table.user_id='".$dummy."'";
+	$startArticle = ($_GET['page'] - 1) * 3;
+	$query = "SELECT questions_table.user_id as quser,title,admin,question_id,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id where questions_table.user_id='".$dummy."'limit ".$startArticle.','.'5';
 					$result = mysqli_query($connection,$query) or die(" to query database".mysql_error());
+					$count=$result->num_rows;
+					$totalpages=ceil($count/3);	
+				// echo $totalpages;
+					if ($totalpages==0){
+						$totalpages=1;
+					}
+					if (!isset($_GET['page'])){
+						$_GET['page']=0;
+					}
+					else{
+						$_GET['page']=(int)$_GET['page'];
+					}
+
+					if($_GET['page']<1){
+						$_GET['page']=1;
+					}
+					elseif ($_GET['page'] > $totalpages) {
+						$_GET['page']=$totalpages;
+					}
+
+				
 	
-		?>s
+		?>
 
 <div class="container">
+<?php
+ 
+ if ($useradmin==1){
+ 	?>
+ 	<div class="row">
+ 	<br>
+ 	</div>
+ 	<div class="row">
+ 	  <div class="col-md-2">
+  <form action="main_home.php" method="post">
+    <button type="submit" class="btn btn-danger">Top Questions</button>
+  </form>
+  </div>
+<div class="col-md-2">
+ <form action="questions_panel.php" method="post">
+ <button type="submit" class="btn btn-success">Questions Panel</button>
+ </form>
+ </div>
+ <div class="col-md-2">
+  <form action="users_page.php?page=1" method="post">
+  <button type="submit" class="btn btn-info">Users Panel</button>
+  </form>
+  </div>
+
+ 
+</div>
+
+
+
+ 	<?php
+
+
+ }
+?>
 	<div class="row">
 		<div class="col-md-12">
 
@@ -112,10 +167,10 @@ if ($uploadOk == 0) {
 						</div>
 						<div class="col-md-6">
 							<p>
-								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
+								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1">
 									<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
 								</a>
-								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
+								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1"> <?php echo htmlentities($row['admin']) ?></a>
 									<?php 
 										echo '(',scores($row['quser']),')'," on ".htmlentities($row['created_at'])."<br />"?> 
 								</b>
@@ -130,6 +185,19 @@ if ($uploadOk == 0) {
 					}
 		
 						?>
+							<center><ul class="pagination">
+					<?php
+					foreach (range(1,$totalpages) as $page){
+						// echo $page;
+						// echo "hi";
+						if($page == $_GET['page']){
+        					echo '<li><a class="active"><span class="currentpage">' . $page . '</span></a></li>';
+        					// echo  "current";
+    					}else if($page ==1 || $page ==$totalpages ||($page >= $_GET['page'] -2 && $page <= $_GET['page']+2)){
+							 echo '<li><a href="?page=' . $page . '">' . $page . '</a></li>'; 
+						}
+					}
+					?>
 
 		</div>
 	</div>

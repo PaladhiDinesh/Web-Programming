@@ -4,6 +4,38 @@
 <?php include "scripts.php"; ?>
 <h1 align="center">Welcome to Answers Kart</h1>
 <div class="container">
+<?php
+ 
+ if ($useradmin==1){
+ 	?>
+ 	<div class="row">
+ 	  <div class="col-md-2">
+  <form action="main_home.php" method="post">
+    <button type="submit" class="btn btn-danger">Top Questions</button>
+  </form>
+  </div>
+<div class="col-md-2">
+ <form action="questions_panel.php" method="post">
+ <button type="submit" class="btn btn-success">Questions Panel</button>
+ </form>
+ </div>
+ <div class="col-md-2">
+  <form action="users_page.php?page=1" method="post">
+  <button type="submit" class="btn btn-info">Users Panel</button>
+  </form>
+  </div>
+
+ 
+</div>
+
+
+
+ 	<?php
+
+
+ }
+?>
+
 	<div class="row">
 		<div class="col-md-12">
 			<h2>Top Questions</h2><hr/>
@@ -21,10 +53,10 @@
 				</div>
 				<div class="col-md-6">
 				<p>
-						<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
+						<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1">
 						<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
 						</a>
-						<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
+						<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1"> <?php echo htmlentities($row['admin']) ?></a>
 						<?php 
 						echo '(',scores($row['quser']),')'," on ".htmlentities($row['created_at'])."<br />"?> 
 						</b>

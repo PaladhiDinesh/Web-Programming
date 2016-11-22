@@ -2,6 +2,8 @@
 <?php include "session.php"; ?>	
 <?php
 	if ($USERID != 'undefined'){
+
+
 		header('Location:main_home.php');
 	}
 	$Invalid =" ";
@@ -13,16 +15,20 @@
 		$query = "SELECT * from login_details where admin='$username' and password='$password'";
 		$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-		if ($result->num_rows > 0){
-			$_SESSION['login_user']=$row['user_id'];
-			$_SESSION['login_name']=$row['admin'];
-			header('Location:main_home.php');
+
+
+			if ($result->num_rows > 0){
+				$_SESSION['login_user']=$row['user_id'];
+				$_SESSION['login_name']=$row['admin'];
+				$_SESSION['admin_value']=$row['admin_rights'];
+				header('Location:main_home.php');
+				}
+			
+			else{
+	 			$Invalid= "Invalid username or password!"; 
+	 		}
+			mysqli_close($connection);
 		}
-		else{
- 			$Invalid= "Invalid username or password!"; 
- 		}
-		mysqli_close($connection);
-	}
 ?>
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>

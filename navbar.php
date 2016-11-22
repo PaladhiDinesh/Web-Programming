@@ -13,10 +13,11 @@
 					<li><a href="unanswered_questions.php?page=1">Unanswered Questions</a></li>
 					<!-- <li><a href="#">My Answered Questions</a></li> -->
 					<li><a href="recent.php">Recent Questions</a></li>
-					<li><a href="help.php">Help Page</a></li></br>
-					<li><a href="Question_panel.php">Question_panel</a></li>
+					<li><a href="help.php">Help Page</a></li>
+<!-- 					<li><a href="adminpage.php">Questions Panel</a></li>
+					<li><a href="userspage.php">Users Panel</a></li> -->
 					</ul>
-				<form class="navbar-form navbar-left">
+					<form class="navbar-form navbar-left">
      			  	<div class="form-group">
         				<input type="text" class="form-control" name="name" id="name" placeholder="User Search">
         			</div>
@@ -30,12 +31,13 @@
 				        if ($USERID != "undefined"){ 
 				     ?>
 
-							<li><a style="color: white" href="ProfilePage.php?name=<?php echo trim($USERNAME);?>"><img width="25" height="25" src="images/<?php echo $_SESSION['login_name']?>" onerror="this.src='images/default.png';">
+							<li><a style="color: white" href="ProfilePage.php?name=<?php echo trim($USERNAME);?>&page=1"><img width="25" height="25" src="images/<?php echo $_SESSION['login_name']?>" onerror="this.src='images/default.png';">
                              <?php echo $USERNAME;?></a></li>
 							<li><a href="logout.php">Log out</a></li>
 							<?php
 						}
 						else{ 
+
 							?>
 							<li><a href="login.php">Log In</a></li>
 							<li><a href="signup.php">Sign Up</a></li>

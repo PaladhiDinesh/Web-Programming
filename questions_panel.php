@@ -2,15 +2,15 @@
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
 <?php include "scripts.php"; ?>
-<h1 align="center">Welcome to Answers Kart</h1>
-<div class="container">
+
 <?php
  
  if ($useradmin==1){
+
+
  	?>
- 	<div class="row">
- 	<br>
- 	</div>
+ 	<h2 align="center">Questions Panel</h2>
+<div class="container">
  	<div class="row">
  	  <div class="col-md-2">
   <form action="main_home.php" method="post">
@@ -31,19 +31,23 @@
  
 </div>
 
-
-
- 	<?php
-
-
- }
-?>
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Recent Questions</h2><hr/>
+		  <hr/>
+		  <?php
+		  // if (isset($_POST['Freeze'])){
+
+		  // 	echo "Freeed";
+
+		  // }
+
+
+
+
+		  ?>
 			<?php 
 				
-				$query = "SELECT title,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id ORDER BY question_id DESC";
+				$query = "SELECT title,admin,questions_table.created_at,question_id,freeze FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id ORDER BY question_id DESC";
 				$result = mysqli_query($connection,$query) or die("Failed to query database12".mysql_error());
 				$count=$result->num_rows;
 				$totalpages=ceil($count/5);	
@@ -66,7 +70,7 @@
 					}
 
 				$startArticle = ($_GET['page'] - 1) * 5;
-				$pagination= "SELECT questions_table.user_id as quser,title,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id ORDER BY question_id DESC limit ".$startArticle.','.'5';
+				$pagination= "SELECT questions_table.user_id as quser,title,admin,questions_table.created_at,question_id,freeze FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id ORDER BY question_id DESC limit ".$startArticle.','.'5';
 				$page_result = mysqli_query($connection,$pagination) or die ("Failed to query database".mysql_error());
 
 				
@@ -75,7 +79,49 @@
 				
 				while ($pagerow = mysqli_fetch_array($page_result,MYSQLI_ASSOC)) { 
 					$question_id=htmlentities($pagerow['question_id']);
-			?>	<div class="row">
+			?>	
+
+			<div class="row">
+				<div class="col-md-1">
+				    <form action="delete.php" method="post">
+                    <input type="hidden" value="<?php echo $question_id?>" name="questionid">
+				    <button type="submit" value="Delete" class="btn btn-danger">Delete</button>
+				    </form>
+				    </div>
+				    <div class="col-md-1">
+
+				     <form action="editquestion.php?ques_id=<?php echo $question_id?>" method="post">
+  						<button type="submit" class="btn btn-success">  Edit    </button>
+				    </form>
+				    </div>
+
+				    <?php
+				    if ($pagerow['freeze']==0)
+				    {
+				    ?>
+				    <div class="col-md-1">
+				    <form action="Freeze.php?ques_id=<?php echo $question_id?>" method="post">
+  							<button type="submit" class="btn btn-primary" name ="Freeze">Freeze</button>
+				    </form>
+				    </div>
+				    <?php
+				}
+				else{
+					?>
+					  <div class="col-md-1">
+				    <form action="Freeze.php?ques_id=<?php echo $question_id?>" method="post">
+  							<button type="submit" class="btn btn-info" name ="Freeze">UnFreeze</button>
+				    </form>
+				    </div>
+				    <?php
+				}
+				?>
+				</div>
+				<br>
+
+
+
+			<div class="row">
 				<div class="col-md-6">
 		
 					<p><a href='single_question.php?ques_id=<?php echo $question_id; ?>&page=1'><?php echo htmlentities($pagerow['title']);?></a></p>
@@ -91,6 +137,7 @@
 								</b>
 							</p>
 				</div>
+				
 				<div class="col-md-12">
 				<div class="row"><hr/></div>
 				</div>
@@ -117,3 +164,10 @@
 		</div>
 	</div>
 </div>
+<?php
+}
+else
+{
+	header('Location:main_home.php');
+}
+?>

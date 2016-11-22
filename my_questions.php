@@ -2,8 +2,42 @@
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
 <?php include "scripts.php"; ?>	
-<h2 align="center"> My Questions</h2><hr/>
+<h2 align="center"> My Questions</h2>
 <div class="container">
+<?php
+ 
+ if ($useradmin==1){
+ 	?>
+ 	<div class="row">
+ 	<br>
+ 	</div>
+ 	<div class="row">
+ 	  <div class="col-md-2">
+  <form action="main_home.php" method="post">
+    <button type="submit" class="btn btn-danger">Top Questions</button>
+  </form>
+  </div>
+<div class="col-md-2">
+ <form action="questions_panel.php" method="post">
+ <button type="submit" class="btn btn-success">Questions Panel</button>
+ </form>
+ </div>
+ <div class="col-md-2">
+  <form action="users_page.php?page=1" method="post">
+  <button type="submit" class="btn btn-info">Users Panel</button>
+  </form>
+  </div>
+
+ 
+</div>
+
+
+
+ 	<?php
+
+
+ }
+?>
 	<div class="row">
 		<div class="col-md-12">
 			<?php
@@ -38,6 +72,7 @@
 					while ($row = mysqli_fetch_array($page_result,MYSQLI_ASSOC)) {
 						$question_id=htmlentities($row['question_id']);
 						?>
+						<hr/>
 					<div class="row">
 						<div class="col-md-6">
 							<p>
@@ -46,10 +81,10 @@
 						</div>
 						<div class="col-md-6">
 							<p>
-								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
+								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1">
 									<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
 								</a>
-								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
+								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1"> <?php echo htmlentities($row['admin']) ?></a>
 									<?php 
 										echo'(',scores($row['quser']),')'," on ".htmlentities($row['created_at'])."<br />";
 										// echo $row['quser'];

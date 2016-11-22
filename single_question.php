@@ -13,7 +13,7 @@
 			header('Location:single_question.php?ques_id='.$newquestion);
 		}
 	}
-	$query = "SELECT questions_table.user_id,title,admin,content,questions_table.created_at,ques_votecount FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
+	$query = "SELECT questions_table.user_id,title,admin,content,questions_table.created_at,ques_votecount,freeze FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
 	// print_r($query);
 	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id='".$_GET['ques_id']."' ORDER BY marks DESC,ans_votecount DESC";
 
@@ -62,11 +62,50 @@
 	
 ?>	
 <div class="container">
+<?php
+ 
+ if ($useradmin==1){
+ 	?>
+ 	<div class="row">
+ 	<br>
+ 	</div>
+ 	<div class="row">
+ 	  <div class="col-md-2">
+  <form action="main_home.php" method="post">
+    <button type="submit" class="btn btn-danger">Top Questions</button>
+  </form>
+  </div>
+<div class="col-md-2">
+ <form action="questions_panel.php" method="post">
+ <button type="submit" class="btn btn-success">Questions Panel</button>
+ </form>
+ </div>
+ <div class="col-md-2">
+  <form action="users_page.php?page=1" method="post">
+  <button type="submit" class="btn btn-info">Users Panel</button>
+  </form>
+  </div>
+
+ 
+</div>
+
+
+
+ 	<?php
+
+
+ }
+?>
 	<?php
 	 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 		$user_id = $row['user_id']; 
 	?> <p class="lead"><h3> 
 	<?php
+	if ($row['freeze']==1){
+		?> <center><font color ="red">This Question is freezed</font></center><?php
+
+
+	}
 		echo htmlentities($row['title'])."<br />"; 
 	?></p></h3><hr/>
 	<?php
@@ -150,17 +189,29 @@
 						<?php
 					
 					if ($user_id==$USERID){
+
 						if($row1['marks']==1) {
+							if ($row['freeze']=1){
 							?>
 							
-									<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #006400 ;cursor: pointer"></i>
+									<i class="fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #006400 ;cursor: pointer"></i>
 							<?php 
+						}
+						else
+						{  ?>
+							<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #006400 ;cursor: pointer"></i>
+
+							<?php
+
+						}
 						}else{ 
+							if ($row['freeze']==0){
 							?>
 						
 									<i class="correct_ans fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #D3D3D3; cursor:pointer"></i>
 						
 							<?php 
+						}
 						}
 					}else{
 						if($row1['marks']==1){
@@ -240,6 +291,9 @@
 		}
 	?>
 	<form class="form col-md-offset-1 col-md-6" method="post">
+	<?php 
+	if ($row['freeze']==0){
+	?>
 		<h4><p>Your Answer</p></h4>
 		<textarea id="summernote" name="summernote" required>Post your Answer here</textarea>
 		<?php 
@@ -261,7 +315,7 @@
  	    	</div>
  			<?php
  		}
-
+}
  		?> 
 					<center><ul class="pagination">
 					<?php

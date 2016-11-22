@@ -4,6 +4,7 @@
 <?php include "scripts.php"; ?>
 <?php
 
+if ($useradmin==1){
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['questionid'])) {
@@ -15,7 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = mysqli_query($connection, $query);
 
         // Send the user back to the first page so they don't have that annoying pop-up if they hit the refresh button after deleting something.
-        header('Location: Question_panel.php'); // Obviously, replace with the location of the page that you need it to redirect to.
+        header('Location: questions_panel.php'); // Obviously, replace with the location of the page that you need it to redirect to.
     }
+}
+}
+else
+{
+	 header('Location: 404error.php');
 }
 ?>

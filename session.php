@@ -5,9 +5,11 @@
 	if (isset($_SESSION['login_user'])){ 
 		$USERID=$_SESSION['login_user'];
 		$USERNAME=$_SESSION['login_name'];
+		$useradmin=$_SESSION['admin_value'];
 	}
 	else{
 		$USERID='undefined';
+		$useradmin='';
 	}
 
 	function scores($user){
@@ -15,7 +17,7 @@
 		$query="SELECT SUM(ques_votecount) from questions_table  WHERE user_id ='$user' GROUP BY user_id";
 		$result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
 		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-		echo "Score ",$row['SUM(ques_votecount)'];
+		echo $row['SUM(ques_votecount)'];
 	}
 
 ?>	
