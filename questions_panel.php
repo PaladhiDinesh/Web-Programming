@@ -100,7 +100,7 @@
 				    {
 				    ?>
 				    <div class="col-md-1">
-				    <form action="Freeze.php?ques_id=<?php echo $question_id?>" method="post">
+				    <form action="freeze.php?ques_id=<?php echo $question_id?>" method="post">
   							<button type="submit" class="btn btn-primary" name ="Freeze">Freeze</button>
 				    </form>
 				    </div>
