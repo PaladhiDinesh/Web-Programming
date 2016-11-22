@@ -17,10 +17,12 @@
 <!-- 					<li><a href="adminpage.php">Questions Panel</a></li>
 					<li><a href="userspage.php">Users Panel</a></li> -->
 					</ul>
-					<form class="navbar-form navbar-left">
+					<form action="./ProfilePage.php" class="navbar-form navbar-left">
      			  	<div class="form-group">
         				<input type="text" class="form-control" name="name" id="name" placeholder="User Search">
-        			</div>
+        				<input type="hidden" class="form-control" name="page" id="name" value="1">
+
+        			</div>	
         			<div id ="userlist"></div>
 
     		    	<!-- <button type="submit" class="btn btn-default">Submit</button> -->
