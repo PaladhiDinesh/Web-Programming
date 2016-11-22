@@ -163,7 +163,7 @@
 						<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
 						<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
 						</a>
-						<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>"> <?php echo htmlentities($row['admin']) ?></a>
+						<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1"> <?php echo htmlentities($row['admin']) ?></a>
 						<?php 
 						echo '(',scores($row['user_id']),')'," on ".htmlentities($row['created_at'])."<br />"?> 
 						</b>
@@ -278,7 +278,7 @@
 								<a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>">
 						<img width="25" height="25" src="images/<?php echo $row1['admin']?>" onerror="this.src='images/default.png';" >
 						</a>
-						<b><?php echo "Answered by ";?><a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>"> <?php echo htmlentities($row1['admin']) ?></a>
+						<b><?php echo "Answered by ";?><a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>&page=1"> <?php echo htmlentities($row1['admin']) ?></a>
 						<?php 
 						echo '(',scores($row1['a_user']),')'," on ".htmlentities($row1['created_at'])."<br />"?> 
 						</b>
