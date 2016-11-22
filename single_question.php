@@ -98,6 +98,7 @@
 ?>
 	<?php
 	 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
 		$user_id = $row['user_id']; 
 	?> <p class="lead"><h3> 
 	<?php
@@ -108,9 +109,6 @@
 	}
 		echo htmlentities($row['title'])."<br />"; 
 	?></p></h3><hr/>
-	<?php
-
-	?> 
 	<div class="row">
 		<div class="col-md-12">
 			<div class="col-md-1">
@@ -135,6 +133,7 @@
 				<div class="row ques_likes_container">
 					<i class="ques_votes_count_down fa fa-thumbs-o-down" aria-hidden="true" style="font-size: 30px;color : #D3D3D3 ;cursor: pointer;"></i></div>
 					<?php
+
 					
 					}
 					else{
@@ -176,11 +175,14 @@
 	<h4> Answers </h4><hr/>
 
 	<?php
+
 		while ($row1 = mysqli_fetch_array($page_result,MYSQLI_ASSOC)) {
+
 			//echo $row1['answer_id'];
 			$ansvotequery = "SELECT votes from votes_table WHERE answer_id =".$row1['answer_id']." and question_id ='".$_GET['ques_id']."'";
 			$ans_vote_result = mysqli_query($connection,$ansvotequery) or die("Failed to query database hi");
 			$ans_vote_row = mysqli_fetch_array($ans_vote_result,MYSQLI_ASSOC);
+
 			//echo $ans_vote_row['votes'],"hi",$row1['answer_id'];
 			?>
 			<div class='row'>
@@ -191,7 +193,7 @@
 					if ($user_id==$USERID){
 
 						if($row1['marks']==1) {
-							if ($row['freeze']=1){
+							if ($row['freeze']==1){
 							?>
 							
 									<i class="fa fa-check" aria-hidden="true" style = "font-size: 30px;color : #006400 ;cursor: pointer"></i>
@@ -292,7 +294,9 @@
 	?>
 	<form class="form col-md-offset-1 col-md-6" method="post">
 	<?php 
+	echo $row['freeze'];
 	if ($row['freeze']==0){
+
 	?>
 		<h4><p>Your Answer</p></h4>
 		<textarea id="summernote" name="summernote" required>Post your Answer here</textarea>
