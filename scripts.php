@@ -4,6 +4,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>	
 <script>
 	$(document).ready(function(){
 		$('#name').keyup(function(){

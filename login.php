@@ -7,7 +7,25 @@
 		header('Location:main_home.php');
 	}
 	$Invalid =" ";
-	if (isset($_POST['submit']) && !empty($_POST['username']) && !empty($_POST['password'])){
+	$captchaerrormsg=" ";
+
+
+	if(isset($_POST['g-recaptcha-response'])){
+          $captcha=$_POST['g-recaptcha-response'];
+        
+        if(!$captcha){
+          $captchaerrormsg='<font color="red"><h4>Please check the captcha form.</h4></font>';
+        }
+        $secretKey = "6LfSAw4UAAAAAEFPBxtHY7_ypsTWcUwNkihqB0KF";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+        $responseKeys = json_decode($response,true);
+        if(intval($responseKeys["success"]) !== 1) {
+         // echo '<h2>Error using captcha</h2>';
+  
+        } else {
+          //echo '<h2>Successful</h2>';
+          if (isset($_POST['submit']) && !empty($_POST['username']) && !empty($_POST['password'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$username = mysqli_real_escape_string($connection,$username);
@@ -29,6 +47,9 @@
 	 		}
 			mysqli_close($connection);
 		}
+        }
+        }
+	
 ?>
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>
@@ -50,6 +71,7 @@
               			<input type="password" class="form-control input-lg" name="password" id = "password" placeholder = "password" required>
               			<p id="passworderror"></p>
             		</div>
+            		<div class="g-recaptcha" data-sitekey="6LfSAw4UAAAAANQYFP686-AGZcbHZQTn97-jI1WV"></div><br>
             		<div class="form-group">
               			<button id="submit" class="btn btn-dinesh btn-lg btn-block" name ="submit">Sign In</button>
               			<h4>
@@ -58,7 +80,8 @@
               			?> 
               			<a href="signup.php">Sign Up</a></h4>
               			<?php
-              			echo $Invalid ?>
+              			echo $Invalid; 
+              			echo $captchaerrormsg;?>
             		</div>
           		</form>
       		</div>
