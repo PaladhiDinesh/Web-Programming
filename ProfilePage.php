@@ -24,7 +24,7 @@ Welcome to Answers Kart</h1><hr/>
 
 	$dummy = $row1['user_id'];
 	$startArticle = ($_GET['page'] - 1) * 3;
-	$query = "SELECT questions_table.user_id as quser,title,admin,question_id,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id where questions_table.user_id='".$dummy."'limit ".$startArticle.','.'5';
+	$query = "SELECT questions_table.user_id as quser,title,tags,admin,question_id,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id where questions_table.user_id='".$dummy."'limit ".$startArticle.','.'5';
 					$result = mysqli_query($connection,$query) or die(" to query database".mysql_error());
 					$count=$result->num_rows;
 					$totalpages=ceil($count/3);	
@@ -160,12 +160,25 @@ if ($uploadOk == 0) {
 						$question_id=htmlentities($row['question_id']);
 						?>
 						<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-8">
 							<p>
-								<a href='single_question.php?ques_id=<?php echo $question_id; ?>'><?php echo htmlentities($row['title']);?></a>
+								<h3><a href='single_question.php?ques_id=<?php echo $question_id; ?>'><?php echo htmlentities($row['title']);?></a></h3>
+								<h4>Tags:
+				 <?php
+					$onetag=explode(" ",$row['tags']);
+					foreach ($onetag as $value) {?>
+						<a href="tagspage.php?name=<?php echo $value;?>">
+						<?php
+					 echo "$value";?> </a><?php
+					}
+						///echo $row['tags']."<br />";
+				?>
+
+
+				</h4>
 							</p>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<p>
 								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1">
 									<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >

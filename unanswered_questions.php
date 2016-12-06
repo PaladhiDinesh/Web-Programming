@@ -65,7 +65,7 @@
 					}
 
 				$startArticle = ($_GET['page'] - 1) * 5;
-				$pagination="SELECT questions_table.user_id as quser,title,admin,questions_table.created_at,questions_table.question_id from questions_table LEFT JOIN answers_table ON questions_table.question_id=answers_table.question_id JOIN login_details ON login_details.user_id=questions_table.user_id WHERE questions_table.question_id NOT IN (SELECT question_id from answers_table) limit ".$startArticle.','.'5';
+				$pagination="SELECT questions_table.user_id as quser,title,tags,admin,questions_table.created_at,questions_table.question_id from questions_table LEFT JOIN answers_table ON questions_table.question_id=answers_table.question_id JOIN login_details ON login_details.user_id=questions_table.user_id WHERE questions_table.question_id NOT IN (SELECT question_id from answers_table) limit ".$startArticle.','.'5';
 				$page_result = mysqli_query($connection,$pagination) or die ("Failed to query database".mysql_error());
 
 
@@ -78,10 +78,23 @@
 					$question_id=htmlentities($row['question_id']);
 			?>
 			<div class="row">
-				<div class="col-md-6">
-					<p><a href='single_question.php?ques_id=<?php echo $question_id;?>&page=1'><?php echo htmlentities($row['title']);?></a></p>
+				<div class="col-md-8">
+					<h3><p><a href='single_question.php?ques_id=<?php echo $question_id;?>&page=1'><?php echo htmlentities($row['title']);?></a></p></h3>
+					<h4>Tags:
+				 <?php
+					$onetag=explode(" ",$row['tags']);
+					foreach ($onetag as $value) {?>
+						<a href="tagspage.php?name=<?php echo $value;?>">
+						<?php
+					 echo "$value";?> </a><?php
+					}
+						///echo $row['tags']."<br />";
+				?>
+
+
+				</h4>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-4">
 							<p>
 								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1">
 									<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >

@@ -13,7 +13,7 @@
 			header('Location:single_question.php?ques_id='.$newquestion);
 		}
 	}
-	$query = "SELECT questions_table.user_id,title,admin,content,questions_table.created_at,ques_votecount,freeze FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
+	$query = "SELECT questions_table.user_id,title,admin,tags,content,questions_table.created_at,ques_votecount,freeze FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
 	// print_r($query);
 	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id='".$_GET['ques_id']."' ORDER BY marks DESC,ans_votecount DESC";
 
@@ -154,9 +154,23 @@
 					<i class="ques_votes_count_down fa fa-thumbs-o-down" aria-hidden="true" style="font-size: 30px;color : #D3D3D3 ;cursor: pointer;"></i></div> -->
 			</div>
 			<div class="col-md-8">
+				<div class="row">
 				<?php
 					echo $row['content']."<br />";
-				?></div>
+				?>
+					</div>
+				<div class="row">
+			<h4>Tags : <?php
+					$onetag=explode(" ",$row['tags']);
+					foreach ($onetag as $value) {?>
+						<a href="tagspage.php?name=<?php echo $value;?>">
+						<?php
+					 echo "$value";?> </a><?php
+					}
+						///echo $row['tags']."<br />";
+				?></h4>
+				</div>
+				</div>
 				<div class="col-md-3">
 					<p>
 						<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
@@ -169,10 +183,10 @@
 					</p>
 				</div>
 		</div>
-	</div>
+	</div>	
+	<h4> Answers </h4>
 
-	
-	<h4> Answers </h4><hr/>
+	<hr/>
 
 	<?php
 
