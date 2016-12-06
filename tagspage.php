@@ -47,7 +47,7 @@ $tagname=mysql_real_escape_string($_GET['name']);
 			<h2>Questions</h2><hr/>
 			<?php 
 				
-				$query = "SELECT title,admin,questions_table.created_at,tags,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE tags LIKE '%$tagname%'";
+				$query = "SELECT questions_table.user_id as quser,title,tags,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE tags LIKE '% $tagname %' or tags LIKE '% $tagname' or tags LIKE '$tagname' or tags LIKE '$tagname %'";
 				$result = mysqli_query($connection,$query) or die("Failed to query database12".mysql_error());
 				$count=$result->num_rows;
 				$totalpages=ceil($count/5);	
@@ -70,7 +70,7 @@ $tagname=mysql_real_escape_string($_GET['name']);
 					}
 
 				$startArticle = ($_GET['page'] - 1) * 5;
-				$pagination= "SELECT questions_table.user_id as quser,title,tags,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE tags LIKE '%$tagname%' limit ".$startArticle.','.'5';
+				$pagination= "SELECT questions_table.user_id as quser,title,tags,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE tags LIKE '% $tagname %' or tags LIKE '% $tagname' or tags LIKE '$tagname' or tags LIKE '$tagname %' limit ".$startArticle.','.'5';
 				$page_result = mysqli_query($connection,$pagination) or die ("Failed to query database".mysql_error());
 
 				
