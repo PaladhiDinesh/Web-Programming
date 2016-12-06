@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2016 at 10:29 AM
+-- Generation Time: Nov 22, 2016 at 02:15 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -71,11 +71,8 @@ INSERT INTO `answers_table` (`answer_id`, `question_id`, `user_id`, `answer`, `m
 (46, 81, 9, 'Post your Answer here', 0, '2016-11-20 05:53:22', 0),
 (47, 80, 9, 'Post your Answer here', 0, '2016-11-20 05:54:09', 0),
 (52, 7, 1, 'Post your Answer here', 0, '2016-11-20 21:50:27', -1),
-(53, 86, 22, 'Post your Answer here', 0, '2016-11-22 18:00:19', -1),
-(54, 85, 22, 'Post your Answer heresdsadsddsasasdasd', 0, '2016-11-22 19:00:36', 0),
-(55, 74, 1, 'Post your Answer here', 0, '2016-11-22 21:45:42', 0),
-(56, 74, 1, 'Post your Answer here', 0, '2016-11-22 21:45:45', 0),
-(57, 74, 1, 'Post your Answer here', 0, '2016-11-22 21:45:50', 0);
+(53, 86, 22, 'Post your Answer here', 0, '2016-11-22 18:00:19', 0),
+(54, 85, 22, 'Post your Answer heresdsadsddsasasdasd', 0, '2016-11-22 19:00:36', 0);
 
 -- --------------------------------------------------------
 
@@ -117,8 +114,7 @@ INSERT INTO `login_details` (`admin`, `password`, `user_id`, `created_at`, `emai
 ('rstantzdd', 'sds', 31, '2016-10-25 20:19:21', '', 0),
 ('siri', 'majeti', 32, '2016-11-01 18:01:01', 'siri@gmail.com', 0),
 ('yash', '"; INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2); --', 33, '2016-11-01 18:01:59', 'yash@gmail.com', 0),
-('a', 's', 34, '2016-11-22 02:12:16', 's@gmail.com', 0),
-('madhavi', 'madhavi', 35, '2016-11-22 22:23:25', 'mad@gmail.com', 0);
+('a', 's', 34, '2016-11-22 02:12:16', 's@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -133,28 +129,25 @@ CREATE TABLE `questions_table` (
   `content` longtext NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ques_votecount` int(11) NOT NULL,
-  `freeze` int(255) NOT NULL DEFAULT '0',
-  `tags` varchar(255) NOT NULL
+  `freeze` int(255) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questions_table`
 --
 
-INSERT INTO `questions_table` (`question_id`, `user_id`, `title`, `content`, `created_at`, `ques_votecount`, `freeze`, `tags`) VALUES
-(1, 1, 'Inserting into sql database', 'How to insert into sql database ?', '2016-10-16 01:58:43', 0, 0, ''),
-(4, 1, 'php for loop', 'I need a sample example which shows php for loop', '2016-10-16 04:27:22', -1, 0, ''),
-(5, 2, 'php foreach loop', 'Please show me how to write basic foreach loop', '2016-10-16 04:29:40', 0, 0, ''),
-(6, 1, 'How to change btn color in Bootstrap', 'Is there a way to change all .btn properties in Bootstrap? I have tried below ones, but still sometimes it shows the default blue color (say after clicking and removing the mouse etc).', '2016-10-16 04:34:10', 1, 0, ''),
-(7, 3, 'Correct way to write line to file in Python', 'I''m used to doing print >>f, "hi there"\n\nHowever, it seems that print >> is getting deprecated. What is the recommended way to do the line above?', '2016-10-16 04:36:08', -1, 0, ''),
-(73, 1, 'How do we send treeset as parameter to methods?', 'I have a treeset containing objects of type named ObjTreeSet. It needs to be passed to a method called ObjCheck(). How is a TreeSet passed as parameter to the ObjCheck() method?', '2016-10-18 08:52:45', 1, 0, ''),
-(74, 2, 'Why tomcat8.exe does not work?', 'In my tomcat, here is tomcat8.exe file, i think it it for to register as service. When I double click to it, nothing happens. Here is only black window (CMD) which is for about milliseconds, I cant read even errors too.', '2016-10-18 09:00:16', 0, 0, ''),
-(76, 2, 'Azure SQL 100% DTU usage', '<p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">i''m having some problems with the reliability of Azure SQL servers.</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">sometimes doing complicated queries with subqueries like the following:</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">SELECT DISTINCT [DeviceName] ,name ,data.[Addr] ,[Signal] FROM (SELECT [DeviceName] ,[Signal] ,MAX([Signal]) OVER (PARTITION BY [Addr]) AS ''MaxSignal'',[Timestamp] ,[Addr] ,[PartitionId] ,[EventEnqueuedUtcTime] FROM [dbo].[mytable] WHERE CAST([Timestamp] AS DATETIME) &gt; DATEADD(HOUR,+2,(DATEADD(MINUTE, -10, GETDATE()))) ) data LEFT JOIN mytable ON [dbo].[myreftable].[Addr] = data.[Addr] WHERE [Signal] = [MaxSignal];\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Is done in almost an instant, like i would assume, at other times simply doing a&nbsp;<code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: pre-wrap;">SELECT COUNT(*) FROM mytable</code>&nbsp;Is taking upwards of 30 minutes, and showing a DTU usage graph like this:</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;"><img src="https://i.stack.imgur.com/iAMB3.png" alt="DTU usage graph" style="margin: 0px; padding: 0px; max-width: 100%;"></p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Anyone know any solutions to this? is it me doing something completely wrong? or is Azure simply not there yet?</p>', '2016-10-18 09:06:15', 0, 1, ''),
-(77, 2, 'How to create table in SO Question', '<span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">I want to create a table to better illustrate my question but cannot find any option to do so. And when I use spaces it thinks that it''s code?</span>', '2016-10-18 09:12:03', 0, 0, ''),
-(78, 4, 'How to commit to remote git repository', '<p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">I am new to git.<br>I have done a clone of remote repo as follows</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git clone https://myusername@something.com/repo.git\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">then I did</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git checkout master\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">made some changes and committed these changes to my local repository like below..</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git add .\r\n\r\ngit commit -m "my changes"\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Now I have to push these changes to the remote repository.<br>I am not sure what to do.</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Would I do a merge of my repo to remote ?<br>what steps do I need to take ?</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">I have git bash and git gui</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">please advise,<br>thanks,</p>', '2016-10-18 09:15:59', 0, 0, ''),
-(85, 22, 'My new data', 'edited', '2016-11-22 16:39:41', 0, 0, ''),
-(86, 22, 'My new Question', '<p>NEwÂ AnswerÂ Â Â Â Â Â Â Â Â Â Â Â </p>', '2016-12-06 14:51:36', 2, 0, 'new old javascript java'),
-(87, 22, 'My new Question 2', 'New Answers 3', '2016-12-06 14:52:22', 0, 0, 'dummy');
+INSERT INTO `questions_table` (`question_id`, `user_id`, `title`, `content`, `created_at`, `ques_votecount`, `freeze`) VALUES
+(1, 1, 'Inserting into sql database', 'How to insert into sql database ?', '2016-10-16 01:58:43', 0, 0),
+(4, 1, 'php for loop', 'I need a sample example which shows php for loop', '2016-10-16 04:27:22', -1, 0),
+(5, 2, 'php foreach loop', 'Please show me how to write basic foreach loop', '2016-10-16 04:29:40', 0, 0),
+(6, 1, 'How to change btn color in Bootstrap', 'Is there a way to change all .btn properties in Bootstrap? I have tried below ones, but still sometimes it shows the default blue color (say after clicking and removing the mouse etc).', '2016-10-16 04:34:10', 1, 0),
+(7, 3, 'Correct way to write line to file in Python', 'I''m used to doing print >>f, "hi there"\n\nHowever, it seems that print >> is getting deprecated. What is the recommended way to do the line above?', '2016-10-16 04:36:08', -1, 0),
+(73, 1, 'How do we send treeset as parameter to methods?', 'I have a treeset containing objects of type named ObjTreeSet. It needs to be passed to a method called ObjCheck(). How is a TreeSet passed as parameter to the ObjCheck() method?', '2016-10-18 08:52:45', 1, 0),
+(74, 2, 'Why tomcat8.exe does not work?', 'In my tomcat, here is tomcat8.exe file, i think it it for to register as service. When I double click to it, nothing happens. Here is only black window (CMD) which is for about milliseconds, I cant read even errors too.', '2016-10-18 09:00:16', 0, 0),
+(76, 2, 'Azure SQL 100% DTU usage', '<p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">i''m having some problems with the reliability of Azure SQL servers.</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">sometimes doing complicated queries with subqueries like the following:</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">SELECT DISTINCT [DeviceName] ,name ,data.[Addr] ,[Signal] FROM (SELECT [DeviceName] ,[Signal] ,MAX([Signal]) OVER (PARTITION BY [Addr]) AS ''MaxSignal'',[Timestamp] ,[Addr] ,[PartitionId] ,[EventEnqueuedUtcTime] FROM [dbo].[mytable] WHERE CAST([Timestamp] AS DATETIME) &gt; DATEADD(HOUR,+2,(DATEADD(MINUTE, -10, GETDATE()))) ) data LEFT JOIN mytable ON [dbo].[myreftable].[Addr] = data.[Addr] WHERE [Signal] = [MaxSignal];\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Is done in almost an instant, like i would assume, at other times simply doing a&nbsp;<code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: pre-wrap;">SELECT COUNT(*) FROM mytable</code>&nbsp;Is taking upwards of 30 minutes, and showing a DTU usage graph like this:</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;"><img src="https://i.stack.imgur.com/iAMB3.png" alt="DTU usage graph" style="margin: 0px; padding: 0px; max-width: 100%;"></p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Anyone know any solutions to this? is it me doing something completely wrong? or is Azure simply not there yet?</p>', '2016-10-18 09:06:15', 0, 1),
+(77, 2, 'How to create table in SO Question', '<span style="color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 15px;">I want to create a table to better illustrate my question but cannot find any option to do so. And when I use spaces it thinks that it''s code?</span>', '2016-10-18 09:12:03', 0, 0),
+(78, 4, 'How to commit to remote git repository', '<p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">I am new to git.<br>I have done a clone of remote repo as follows</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git clone https://myusername@something.com/repo.git\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">then I did</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git checkout master\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">made some changes and committed these changes to my local repository like below..</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git add .\r\n\r\ngit commit -m "my changes"\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Now I have to push these changes to the remote repository.<br>I am not sure what to do.</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Would I do a merge of my repo to remote ?<br>what steps do I need to take ?</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">I have git bash and git gui</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">please advise,<br>thanks,</p>', '2016-10-18 09:15:59', 0, 0),
+(85, 22, 'My new data', 'edited', '2016-11-22 16:39:41', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -185,9 +178,8 @@ INSERT INTO `votes_table` (`vote_id`, `user_id`, `question_id`, `answer_id`, `vo
 (173, 9, 6, 0, 1),
 (174, 22, 81, 0, 1),
 (175, 22, 73, 0, 1),
-(176, 22, 86, 0, 1),
-(177, 22, 85, 54, 0),
-(178, 22, 86, 53, -1);
+(176, 22, 86, 0, -1),
+(177, 22, 85, 54, 0);
 
 --
 -- Indexes for dumped tables
@@ -233,22 +225,22 @@ ALTER TABLE `votes_table`
 -- AUTO_INCREMENT for table `answers_table`
 --
 ALTER TABLE `answers_table`
-  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `login_details`
 --
 ALTER TABLE `login_details`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `questions_table`
 --
 ALTER TABLE `questions_table`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `votes_table`
 --
 ALTER TABLE `votes_table`
-  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
