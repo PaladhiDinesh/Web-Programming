@@ -70,7 +70,7 @@ $tagname=mysql_real_escape_string($_GET['name']);
 					}
 
 				$startArticle = ($_GET['page'] - 1) * 5;
-				$pagination= "SELECT questions_table.user_id as quser,title,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE tags LIKE '%$tagname%' limit ".$startArticle.','.'5';
+				$pagination= "SELECT questions_table.user_id as quser,title,tags,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE tags LIKE '%$tagname%' limit ".$startArticle.','.'5';
 				$page_result = mysqli_query($connection,$pagination) or die ("Failed to query database".mysql_error());
 
 				
@@ -80,11 +80,24 @@ $tagname=mysql_real_escape_string($_GET['name']);
 				while ($pagerow = mysqli_fetch_array($page_result,MYSQLI_ASSOC)) { 
 					$question_id=htmlentities($pagerow['question_id']);
 			?>	<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-8">
 		
-					<p><a href='single_question.php?ques_id=<?php echo $question_id; ?>&page=1'><?php echo htmlentities($pagerow['title']);?></a></p>
+					<h3><p><a href='single_question.php?ques_id=<?php echo $question_id; ?>&page=1'><?php echo htmlentities($pagerow['title']);?></a></p></h3>
+					<h4>Tags:
+				 <?php
+					$onetag=explode(" ",$pagerow['tags']);
+					foreach ($onetag as $value) {?>
+						<a href="tagspage.php?name=<?php echo $value;?>">
+						<?php
+					 echo "$value";?> </a><?php
+					}
+						///echo $row['tags']."<br />";
+				?>
+
+
+				</h4>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<p>
 								<a href="ProfilePage.php?name=<?php echo trim($pagerow['admin']);?>&page=1">
 									<img width="25" height="25" src="images/<?php echo $pagerow['admin']?>" onerror="this.src='images/default.png';" >
