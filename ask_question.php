@@ -7,10 +7,12 @@
 	if ($USERID != "undefined"){
 		if (isset($_POST['submit'])){
 			$title = $_POST['title'];
+			$tags = $_POST['tags'];
 			$summernote = trim($_POST['summernote']);
 			$title = mysqli_real_escape_string($connection,$title);
 			$summernote = mysqli_real_escape_string($connection,$summernote);
-			$query = "INSERT INTO questions_table(user_id,title,content) VALUES ('$USERID','$title','$summernote')";
+			$tags = mysqli_real_escape_string($connection,$tags);
+			$query="INSERT INTO questions_table(user_id,title,content,tags) VALUES ('$USERID','$title','$summernote','$tags')";
 			$result = mysqli_query($connection,$query)or die("Failed to query database".mysql_error());
 			if($result){
 				$last_id = mysqli_insert_id($connection);
@@ -63,6 +65,9 @@
         			<input type="text" id="title" name='title' class="form-control input-lg" placeholder="Title" required />
     			</div>
     			<textarea id="summernote" name="summernote" required>Post your question here</textarea>    		
+    			<div class="form-group">
+    				<input type="text" id="tags" name='tags' class="form-control input-lg" placeholder="Tags" required />
+    			</div>
    				<?php 
    				if ($USERID != "undefined"){?>
 					<div>
