@@ -4,7 +4,7 @@
 <?php include "scripts.php"; ?>
 <?php
 
-$tagname=mysql_real_escape_string($_GET['name']);
+$tagname=$_GET['name'];
 ?>
 <h1 align="center">Questions with <?php echo $tagname; ?> tag</h1>
 <div class="container">
