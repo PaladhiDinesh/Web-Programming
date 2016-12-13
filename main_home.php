@@ -5,7 +5,6 @@
 <h1 align="center">Welcome to Answers Kart</h1>
 <div class="container">
 <?php
- 
  if ($useradmin==1){
  	?>
  	<div class="row">
