@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2016 at 02:07 PM
+-- Generation Time: Dec 13, 2016 at 11:27 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -75,7 +75,15 @@ INSERT INTO `answers_table` (`answer_id`, `question_id`, `user_id`, `answer`, `m
 (54, 85, 22, 'Post your Answer heresdsadsddsasasdasd', 0, '2016-11-22 19:00:36', 0),
 (55, 74, 1, 'Post your Answer here', 0, '2016-11-22 21:45:42', 0),
 (56, 74, 1, 'Post your Answer here', 0, '2016-11-22 21:45:45', 0),
-(57, 74, 1, 'Post your Answer here', 0, '2016-11-22 21:45:50', 0);
+(57, 74, 1, 'Post your Answer here', 0, '2016-11-22 21:45:50', 0),
+(58, 88, 22, 'Post your Answer here', 0, '2016-12-13 06:17:30', 0),
+(59, 88, 22, 'Post your Answer here', 0, '2016-12-13 06:18:10', 0),
+(60, 88, 22, 'Post your Answer here', 0, '2016-12-13 06:18:23', 0),
+(61, 5, 22, 'Post your Answer here', 0, '2016-12-13 14:55:15', 0),
+(62, 5, 22, 'Post your Answer here', 0, '2016-12-13 14:55:20', 0),
+(63, 5, 22, 'Post your Answer here', 0, '2016-12-13 14:55:23', 0),
+(64, 73, 22, 'Post your Answer here', 0, '2016-12-13 15:03:39', 0),
+(65, 73, 22, 'Post your Answer here', 0, '2016-12-13 15:03:42', 0);
 
 -- --------------------------------------------------------
 
@@ -89,36 +97,38 @@ CREATE TABLE `login_details` (
   `user_id` int(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `emailid` varchar(255) NOT NULL,
-  `admin_rights` int(11) NOT NULL DEFAULT '0'
+  `admin_rights` int(11) NOT NULL DEFAULT '0',
+  `checkgit` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login_details`
 --
 
-INSERT INTO `login_details` (`admin`, `password`, `user_id`, `created_at`, `emailid`, `admin_rights`) VALUES
-('admin', 'cs518pa$$', 1, '2016-10-15 22:51:02', '', 0),
-('jbrunelle', 'M0n@rch$', 2, '2016-10-15 22:51:02', '', 0),
-('pvenkman', 'imadoctor', 3, '2016-10-15 22:51:02', '', 0),
-('rstantz', '"; INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2); --', 4, '2016-10-15 22:51:02', '', 0),
-('dbarrett', 'fr1ed3GGS', 5, '2016-10-15 22:51:02', '', 0),
-('ltully', '<!--<i>', 7, '2016-10-15 22:51:02', '', 0),
-('espengler', 'don''t cross the streams', 8, '2016-10-15 22:51:02', '', 0),
-('janine', '--!drop tables;', 9, '2016-10-15 22:51:02', '', 0),
-('winston', 'zeddM0r3', 10, '2016-10-15 22:51:02', '', 0),
-('gozer', 'd3$truct0R', 11, '2016-10-15 22:51:02', '', 0),
-('slimer', 'f33dM3', 12, '2016-10-15 22:51:02', '', 0),
-('zuul', '105"; DROP TABLE', 13, '2016-10-15 22:51:02', '', 0),
-('keymaster', 'n0D@na', 14, '2016-10-15 22:51:02', '', 0),
-('gatekeeper', '$l0r', 15, '2016-10-15 22:51:02', '', 0),
-('staypuft', 'm@r$hM@ll0w', 16, '2016-10-15 22:51:02', '', 0),
-('root', 'hello', 18, '2016-10-25 19:36:02', '', 0),
-('dinesh', 'paladhi', 22, '2016-10-25 20:02:31', '', 1),
-('rstantzdd', 'sds', 31, '2016-10-25 20:19:21', '', 0),
-('siri', 'majeti', 32, '2016-11-01 18:01:01', 'siri@gmail.com', 0),
-('yash', '"; INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2); --', 33, '2016-11-01 18:01:59', 'yash@gmail.com', 0),
-('a', 's', 34, '2016-11-22 02:12:16', 's@gmail.com', 0),
-('madhavi', 'madhavi', 35, '2016-11-22 22:23:25', 'mad@gmail.com', 0);
+INSERT INTO `login_details` (`admin`, `password`, `user_id`, `created_at`, `emailid`, `admin_rights`, `checkgit`) VALUES
+('admin', 'cs518pa$$', 1, '2016-10-15 22:51:02', '', 0, 0),
+('jbrunelle', 'M0n@rch$', 2, '2016-10-15 22:51:02', '', 0, 0),
+('pvenkman', 'imadoctor', 3, '2016-10-15 22:51:02', '', 0, 0),
+('rstantz', '"; INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2); --', 4, '2016-10-15 22:51:02', '', 0, 0),
+('dbarrett', 'fr1ed3GGS', 5, '2016-10-15 22:51:02', '', 0, 0),
+('ltully', '<!--<i>', 7, '2016-10-15 22:51:02', '', 0, 0),
+('espengler', 'don''t cross the streams', 8, '2016-10-15 22:51:02', '', 0, 0),
+('janine', '--!drop tables;', 9, '2016-10-15 22:51:02', '', 0, 0),
+('winston', 'zeddM0r3', 10, '2016-10-15 22:51:02', '', 0, 0),
+('gozer', 'd3$truct0R', 11, '2016-10-15 22:51:02', '', 0, 0),
+('slimer', 'f33dM3', 12, '2016-10-15 22:51:02', '', 0, 0),
+('zuul', '105"; DROP TABLE', 13, '2016-10-15 22:51:02', '', 0, 0),
+('keymaster', 'n0D@na', 14, '2016-10-15 22:51:02', '', 0, 0),
+('gatekeeper', '$l0r', 15, '2016-10-15 22:51:02', '', 0, 0),
+('staypuft', 'm@r$hM@ll0w', 16, '2016-10-15 22:51:02', '', 0, 0),
+('root', 'hello', 18, '2016-10-25 19:36:02', '', 0, 0),
+('dinesh', 'paladhi', 22, '2016-10-25 20:02:31', '', 1, 0),
+('rstantzdd', 'sds', 31, '2016-10-25 20:19:21', '', 0, 0),
+('siri', 'majeti', 32, '2016-11-01 18:01:01', 'siri@gmail.com', 0, 0),
+('yash', '"; INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2); --', 33, '2016-11-01 18:01:59', 'yash@gmail.com', 0, 0),
+('a', 's', 34, '2016-11-22 02:12:16', 's@gmail.com', 0, 0),
+('madhavi', 'madhavi', 35, '2016-11-22 22:23:25', 'mad@gmail.com', 0, 0),
+('kittu', 'kittu', 36, '2016-12-13 06:25:45', 'kittu@gmail.com', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -154,7 +164,13 @@ INSERT INTO `questions_table` (`question_id`, `user_id`, `title`, `content`, `cr
 (78, 4, 'How to commit to remote git repository', '<p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">I am new to git.<br>I have done a clone of remote repo as follows</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git clone https://myusername@something.com/repo.git\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">then I did</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git checkout master\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">made some changes and committed these changes to my local repository like below..</p><pre style="margin-bottom: 1em; padding: 5px; border-width: 0px; border-style: initial; border-color: initial; width: auto; max-height: 600px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); word-wrap: normal; color: rgb(36, 39, 41);"><code style="margin: 0px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace, sans-serif; background-color: rgb(239, 240, 241); white-space: inherit;">git add .\r\n\r\ngit commit -m "my changes"\r\n</code></pre><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Now I have to push these changes to the remote repository.<br>I am not sure what to do.</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">Would I do a merge of my repo to remote ?<br>what steps do I need to take ?</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">I have git bash and git gui</p><p style="margin-bottom: 1em; padding: 0px; border: 0px; font-size: 15px; clear: both; color: rgb(36, 39, 41); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;">please advise,<br>thanks,</p>', '2016-10-18 09:15:59', 0, 0, 'git github'),
 (85, 22, 'My new data', 'edited', '2016-11-22 16:39:41', 0, 0, 'dummy'),
 (86, 22, 'My new Question', '<p>NEwÂ AnswerÂ Â Â Â Â Â Â Â Â Â Â Â </p>', '2016-12-06 14:51:36', 0, 0, 'new old javascript java'),
-(87, 22, 'My new Question 2', 'New Answers 3', '2016-12-06 14:52:22', 0, 0, 'dummy');
+(87, 22, 'My new Question 2', 'New Answers 3', '2016-12-06 14:52:22', 0, 0, 'dummy'),
+(88, 22, 'My new question for today for php', '<p>New Answer&nbsp;&nbsp;&nbsp;&nbsp;</p>', '2016-12-13 05:11:21', 0, 0, 'question answer php'),
+(89, 22, 'zzx', 'Post your question here', '2016-12-13 05:11:56', 0, 0, 'zz'),
+(90, 22, 'asdad', 'Post your question here', '2016-12-13 05:13:36', 0, 0, 'ss'),
+(91, 22, 'ssdsda', 'Post your question here', '2016-12-13 05:14:48', 0, 0, 's'),
+(92, 22, 'dfdsfsfdsf', 'Post your question here', '2016-12-13 05:58:22', 0, 0, 'dfd'),
+(93, 36, 'my new question', 'Post your question here', '2016-12-13 06:26:22', 0, 1, 'question');
 
 -- --------------------------------------------------------
 
@@ -234,17 +250,17 @@ ALTER TABLE `votes_table`
 -- AUTO_INCREMENT for table `answers_table`
 --
 ALTER TABLE `answers_table`
-  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `login_details`
 --
 ALTER TABLE `login_details`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `questions_table`
 --
 ALTER TABLE `questions_table`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT for table `votes_table`
 --
