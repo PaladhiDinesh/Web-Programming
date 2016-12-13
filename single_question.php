@@ -1,7 +1,7 @@
 <?php include "session.php"; ?>	
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
-
+<?php include "scripts.php"; ?>	
 <?php 
 	if (isset($_POST['submit'])){
 		$newquestion = $_GET['ques_id'];
@@ -240,6 +240,29 @@
 	<hr/>
 
 	<?php
+	  function bbc2html($content) {
+              $search = array (
+                '/(\[b\])(.*?)(\[\/b\])/',
+                '/(\[i\])(.*?)(\[\/i\])/',
+                '/(\[u\])(.*?)(\[\/u\])/',
+                '/(\[ul\])(.*?)(\[\/ul\])/',
+                '/(\[li\])(.*?)(\[\/li\])/',
+                '/(\[url=)(.*?)(\])(.*?)(\[\/url\])/',
+                '/(\[url\])(.*?)(\[\/url\])/'
+              );
+
+              $replace = array (
+                '<strong>$2</strong>',
+                '<em>$2</em>',
+                '<u>$2</u>',
+                '<ul>$2</ul>',
+                '<li>$2</li>',
+                '<a href="$2" target="_blank">$4</a>',
+                '<a href="$2" target="_blank">$2</a>'
+              );
+
+              return preg_replace($search, $replace, $content);
+            }
 
 		while ($row1 = mysqli_fetch_array($page_result,MYSQLI_ASSOC)) {
 
@@ -333,8 +356,6 @@
 					<input class="answer_id" type="hidden" value=<?php echo $row1['answer_id']?>>
 					<div class="col-md-8">
 						<?php
-							
-
             echo bbc2html($row1['answer'])."<br />";
 						?>
 					</div>
@@ -343,9 +364,37 @@
 				
 
 								<a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>">
-						<img width="25" height="25" src="images/<?php echo $row1['admin']?>" onerror="this.src='images/default.png';" >
+						<?php
+             
+              
+              if($row["checkgit"]==1)
+              { 
+                echo "<img width='25' height='25' alt='abc' src='https://github.com/".$row['admin'].".png' />";
+                
+              }
+              else
+              {
+                $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $row['emailid'] ) ) ) . "?d=" . urlencode( 'https://s24.postimg.org/a4bwqzpgl/default.png' );
+              $source = "./images/".$row['admin'];
+              $source = trim($source);
+              if(file_exists($source))
+              { 
+                 ?>
+                  <img width='25' height='25' alt='abc' src='./images/<?php echo $row['admin']; ?>' />
+                <?php
+              }
+              else
+              {
+                 ?>
+                  <img width='25' height='25' alt='abc' src='<?php echo $grav_url; ?>' / >
+                <?php
+              }
+              }
+              ?>
 						</a>
-						<b><?php echo "Answered by ";?><a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>&page=1"> <?php echo htmlentities($row1['admin']) ?></a>
+						<b><?php echo "Answered by ";?><a href="ProfilePage.php?name=<?php echo trim($row1['admin']);?>&page=1"> <?php echo htmlentities($row1['admin']) ?>
+							
+						</a>
 						<?php 
 						echo '(',scores($row1['a_user']),')'," on ".htmlentities($row1['created_at'])."<br />"?> 
 						</b>
@@ -359,7 +408,7 @@
 	?>
 	<form class="form col-md-offset-1 col-md-6" method="post">
 	<?php 
-	// echo $row['freeze'];
+	echo $row['freeze'];
 	if ($row['freeze']==0){
 
 	?>
@@ -401,7 +450,6 @@
 			?>
 	</form>
 </div>
-<?php include "scripts.php"; ?>	
 <script>
     $(document).ready(function() {
     	$('.correct_ans').click(function () {
@@ -531,7 +579,6 @@
   			width: 700
 		});
 	});
-
 </script>
 
 <?php include "footer.php"; ?>	
