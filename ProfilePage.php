@@ -127,6 +127,9 @@ Welcome to Answers Kart</h1><hr/>
 	if ($USERID == $dummy){ ?>
     <center><input type="file" name="fileToUpload" id="fileToUpload"></center>
     <input type="submit" value="Upload Image" name="submit"> 
+    			<a href="./delete_pic.php">    <input type="button" value="Delete picture"> 
+ </a>
+
     <?php } ?>
 </form>
 <h3>Questions Asked by <?php echo $_GET['name']  ?> </h3><hr/>
@@ -180,8 +183,9 @@ if ($uploadOk == 0) {
  	
     }
 }
+?>
 
-
+<?php
 	
 
 					while ($row = mysqli_fetch_array($page_result,MYSQLI_ASSOC)) {
@@ -209,6 +213,7 @@ if ($uploadOk == 0) {
 						</div>
 						<div class="col-md-4">
 							<p>
+
 								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1">
 									<?php
              

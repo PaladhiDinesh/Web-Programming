@@ -70,7 +70,7 @@ $tagname=$_GET['name'];
 					}
 
 				$startArticle = ($_GET['page'] - 1) * 5;
-				$pagination= "SELECT questions_table.user_id as quser,title,tags,admin,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE tags LIKE '% $tagname %' or tags LIKE '% $tagname' or tags LIKE '$tagname' or tags LIKE '$tagname %' limit ".$startArticle.','.'5';
+				$pagination= "SELECT questions_table.user_id as quser,title,tags,admin,checkgit,emailid,questions_table.created_at,question_id FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE tags LIKE '% $tagname %' or tags LIKE '% $tagname' or tags LIKE '$tagname' or tags LIKE '$tagname %' limit ".$startArticle.','.'5';
 				$page_result = mysqli_query($connection,$pagination) or die ("Failed to query database".mysql_error());
 
 				
@@ -100,7 +100,33 @@ $tagname=$_GET['name'];
 				<div class="col-md-4">
 					<p>
 								<a href="ProfilePage.php?name=<?php echo trim($pagerow['admin']);?>&page=1">
-									<img width="25" height="25" src="images/<?php echo $pagerow['admin']?>" onerror="this.src='images/default.png';" >
+									<?php
+             
+              
+              if($pagerow["checkgit"]==1)
+              { 
+                echo "<img width='25' height='25' alt='abc' src='https://github.com/".$pagerow['admin'].".png' />";
+                
+              }
+              else
+              {
+                $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $pagerow['emailid'] ) ) ) . "?d=" . urlencode( 'https://s24.postimg.org/a4bwqzpgl/default.png' );
+              $source = "./images/".$pagerow['admin'];
+              $source = trim($source);
+              if(file_exists($source))
+              { 
+                 ?>
+                  <img width='25' height='25' alt='abc' src='./images/<?php echo $pagerow['admin']; ?>' />
+                <?php
+              }
+              else
+              {
+                 ?>
+                  <img width='25' height='25' alt='abc' src='<?php echo $grav_url; ?>' / >
+                <?php
+              }
+              }
+              ?>
 								</a>
 								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($pagerow['admin']);?>&page=1"> <?php echo htmlentities($pagerow['admin']) ?></a>
 									<?php 
