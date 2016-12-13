@@ -308,9 +308,32 @@
 					<input class="answer_id" type="hidden" value=<?php echo $row1['answer_id']?>>
 					<div class="col-md-8">
 						<?php
-							echo $row1['answer']."<br />";
+							
 
+                         function bbc2html($content) {
+              $search = array (
+                '/(\[b\])(.*?)(\[\/b\])/',
+                '/(\[i\])(.*?)(\[\/i\])/',
+                '/(\[u\])(.*?)(\[\/u\])/',
+                '/(\[ul\])(.*?)(\[\/ul\])/',
+                '/(\[li\])(.*?)(\[\/li\])/',
+                '/(\[url=)(.*?)(\])(.*?)(\[\/url\])/',
+                '/(\[url\])(.*?)(\[\/url\])/'
+              );
 
+              $replace = array (
+                '<strong>$2</strong>',
+                '<em>$2</em>',
+                '<u>$2</u>',
+                '<ul>$2</ul>',
+                '<li>$2</li>',
+                '<a href="$2" target="_blank">$4</a>',
+                '<a href="$2" target="_blank">$2</a>'
+              );
+
+              return preg_replace($search, $replace, $content);
+            }
+            echo bbc2html($row1['answer'])."<br />";
 						?>
 					</div>
 					<div class="col-md-2">
