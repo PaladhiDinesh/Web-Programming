@@ -39,6 +39,8 @@
 				$_SESSION['login_user']=$row['user_id'];
 				$_SESSION['login_name']=$row['admin'];
 				$_SESSION['admin_value']=$row['admin_rights'];
+        $_SESSION['emailid']=$row['emailid'];
+        $_SESSION['checkgit']=$row['checkgit'];
 				header('Location:main_home.php');
 				}
 			
@@ -84,6 +86,7 @@
               			echo $captchaerrormsg;?>
             		</div>
           		</form>
+              <center> <p> <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=dafdedcc9f75c7e7242f">Got Github? Signin Here! </a></p> </center>
       		</div>
       		<div class="modal-footer"></div>
  		</div>
