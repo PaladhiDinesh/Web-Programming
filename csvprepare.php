@@ -2,7 +2,7 @@
 
 <?php
 $filename="piechart";
-$fileopen=fopen('piechart','w');
+$fileopen=fopen('./piechart','w');
 
 $query= "SELECT admin as user,COUNT(questions_table.user_id) as question from questions_table JOIN login_details WHERE questions_table.user_id=login_details.user_id GROUP BY questions_table.user_id";
 $result = mysqli_query($connection,$query) or die("Failed to query database".mysql_error());
