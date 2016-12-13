@@ -1,7 +1,7 @@
 <?php include "session.php"; ?>	
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
-
+<?php include "scripts.php"; ?>	
 <?php 
 	if (isset($_POST['submit'])){
 		$newquestion = $_GET['ques_id'];
@@ -215,6 +215,29 @@
 	<hr/>
 
 	<?php
+	  function bbc2html($content) {
+              $search = array (
+                '/(\[b\])(.*?)(\[\/b\])/',
+                '/(\[i\])(.*?)(\[\/i\])/',
+                '/(\[u\])(.*?)(\[\/u\])/',
+                '/(\[ul\])(.*?)(\[\/ul\])/',
+                '/(\[li\])(.*?)(\[\/li\])/',
+                '/(\[url=)(.*?)(\])(.*?)(\[\/url\])/',
+                '/(\[url\])(.*?)(\[\/url\])/'
+              );
+
+              $replace = array (
+                '<strong>$2</strong>',
+                '<em>$2</em>',
+                '<u>$2</u>',
+                '<ul>$2</ul>',
+                '<li>$2</li>',
+                '<a href="$2" target="_blank">$4</a>',
+                '<a href="$2" target="_blank">$2</a>'
+              );
+
+              return preg_replace($search, $replace, $content);
+            }
 
 		while ($row1 = mysqli_fetch_array($page_result,MYSQLI_ASSOC)) {
 
@@ -310,29 +333,7 @@
 						<?php
 							
 
-                         function bbc2html($content) {
-              $search = array (
-                '/(\[b\])(.*?)(\[\/b\])/',
-                '/(\[i\])(.*?)(\[\/i\])/',
-                '/(\[u\])(.*?)(\[\/u\])/',
-                '/(\[ul\])(.*?)(\[\/ul\])/',
-                '/(\[li\])(.*?)(\[\/li\])/',
-                '/(\[url=)(.*?)(\])(.*?)(\[\/url\])/',
-                '/(\[url\])(.*?)(\[\/url\])/'
-              );
-
-              $replace = array (
-                '<strong>$2</strong>',
-                '<em>$2</em>',
-                '<u>$2</u>',
-                '<ul>$2</ul>',
-                '<li>$2</li>',
-                '<a href="$2" target="_blank">$4</a>',
-                '<a href="$2" target="_blank">$2</a>'
-              );
-
-              return preg_replace($search, $replace, $content);
-            }
+                       
             echo bbc2html($row1['answer'])."<br />";
 						?>
 					</div>
@@ -357,7 +358,7 @@
 	?>
 	<form class="form col-md-offset-1 col-md-6" method="post">
 	<?php 
-	// echo $row['freeze'];
+	echo $row['freeze'];
 	if ($row['freeze']==0){
 
 	?>
@@ -399,7 +400,6 @@
 			?>
 	</form>
 </div>
-<?php include "scripts.php"; ?>	
 <script>
     $(document).ready(function() {
     	$('.correct_ans').click(function () {
@@ -529,7 +529,6 @@
   			width: 700
 		});
 	});
-
 </script>
 
 <?php include "footer.php"; ?>	
