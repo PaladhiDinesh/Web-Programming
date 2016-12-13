@@ -1,7 +1,7 @@
 <?php include "session.php"; ?>	
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
-<?php include "scripts.php"; ?>	
+
 <h2 align="center"> My Questions</h2>
 <div class="container">
 <?php
@@ -157,3 +157,5 @@
 		</div>
 	</div>
 </div>
+
+<?php include "scripts.php"; ?>	

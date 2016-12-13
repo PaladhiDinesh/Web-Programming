@@ -1,4 +1,4 @@
-<header class="navbar navbar-inverse" >
+<header class="navbar navbar-inverse">
 	<div class="container-fluid ">
 		<nav role ="navigation"> 
 				    <!-- Brand and toggle get grouped for better mobile display -->
@@ -16,11 +16,12 @@
 					<li><a href="help.php">Help Page</a></li>
 <!-- 					<li><a href="adminpage.php">Questions Panel</a></li>
 					<li><a href="userspage.php">Users Panel</a></li> -->
+					<li><a href="csvprepare.php">Visualizations</a></li>
 					</ul>
 					<form action="./ProfilePage.php" class="navbar-form navbar-left">
      			  	<div class="form-group">
-        				<input type="text" class="form-control" name="name" id="name" placeholder="User Search">
-        				<input type="hidden" class="form-control" name="page" id="name" value="1">
+        				<input type="text" class="form-control" name="name" id="name" placeholder="User Search"></input>
+        				<input type="hidden" class="form-control" name="page" id="name" value="1"></input>
 
         			</div>	
         			<div id ="userlist"></div>
@@ -32,7 +33,6 @@
 					<?php
 				        if ($USERID != "undefined"){ 
 				     ?>
-
 							<li><a style="color: white" href="ProfilePage.php?name=<?php echo trim($USERNAME);?>&page=1">
 							<?php
               
@@ -60,7 +60,6 @@
               }
               }
               ?>
-
 
                              <?php echo $USERNAME;?></a></li>
 							<li><a href="logout.php">Log out</a></li>
