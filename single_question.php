@@ -346,18 +346,18 @@
               
               if($row["checkgit"]==1)
               { 
-                echo "<img width='25' height='25' alt='abc' src='https://github.com/".$row['admin'].".png' />";
+                echo "<img width='25' height='25' alt='abc' src='https://github.com/".$row1['admin'].".png' />";
                 
               }
               else
               {
-                $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $row['emailid'] ) ) ) . "?d=" . urlencode( 'https://s24.postimg.org/a4bwqzpgl/default.png' );
-              $source = "./images/".$row['admin'];
+                $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $row1['emailid'] ) ) ) . "?d=" . urlencode( 'https://s24.postimg.org/a4bwqzpgl/default.png' );
+              $source = "./images/".$row1['admin'];
               $source = trim($source);
               if(file_exists($source))
               { 
                  ?>
-                  <img width='25' height='25' alt='abc' src='./images/<?php echo $row['admin']; ?>' />
+                  <img width='25' height='25' alt='abc' src='./images/<?php echo $row1['admin']; ?>' />
                 <?php
               }
               else
