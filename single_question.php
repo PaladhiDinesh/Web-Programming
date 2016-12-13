@@ -13,7 +13,7 @@
 			header('Location:single_question.php?ques_id='.$newquestion);
 		}
 	}
-	$query = "SELECT questions_table.user_id,title,admin,tags,content,questions_table.created_at,ques_votecount,freeze FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
+	$query = "SELECT questions_table.user_id,title,admin,checkgit,emailid,tags,content,questions_table.created_at,ques_votecount,freeze FROM questions_table JOIN login_details ON login_details.user_id=questions_table.user_id WHERE question_id=".$_GET['ques_id'];
 	// print_r($query);
 	$answerquery= "SELECT answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id='".$_GET['ques_id']."' ORDER BY marks DESC,ans_votecount DESC";
 
@@ -43,10 +43,10 @@
 
 	$startArticle = ($_GET['page'] - 1) * 5;
 
-	$pagination= "SELECT answers_table.user_id as a_user,answer_id,admin,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id='".$_GET['ques_id']."' ORDER BY marks DESC,ans_votecount DESC limit ".$startArticle.','.'5';
+	$pagination= "SELECT answers_table.user_id as a_user,answer_id,admin,checkgit,emailid,answer,answers_table.created_at,marks,ans_votecount from answers_table JOIN login_details ON login_details.user_id=answers_table.user_id WHERE question_id='".$_GET['ques_id']."' ORDER BY marks DESC,ans_votecount DESC limit ".$startArticle.','.'5';
 	$page_result = mysqli_query($connection,$pagination) or die ("Failed to query database12".mysql_error());
 
-
+   
 
 
 	$quesvotequery = "SELECT votes from votes_table WHERE answer_id=0 and question_id ='".$_GET['ques_id']."'";
@@ -174,7 +174,33 @@
 				<div class="col-md-3">
 					<p>
 						<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>">
-						<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
+						<?php
+             
+              
+              if($row["checkgit"]==1)
+              { 
+                echo "<img width='25' height='25' alt='abc' src='https://github.com/".$row['admin'].".png' />";
+                
+              }
+              else
+              {
+                $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $row['emailid'] ) ) ) . "?d=" . urlencode( 'https://s24.postimg.org/a4bwqzpgl/default.png' );
+              $source = "./images/".$row['admin'];
+              $source = trim($source);
+              if(file_exists($source))
+              { 
+                 ?>
+                  <img width='25' height='25' alt='abc' src='./images/<?php echo $row['admin']; ?>' />
+                <?php
+              }
+              else
+              {
+                 ?>
+                  <img width='25' height='25' alt='abc' src='<?php echo $grav_url; ?>' / >
+                <?php
+              }
+              }
+              ?>
 						</a>
 						<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1"> <?php echo htmlentities($row['admin']) ?></a>
 						<?php 
