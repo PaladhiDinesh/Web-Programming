@@ -1,7 +1,7 @@
 <?php include "session.php"; ?>	
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
-<?php include "scripts.php"; ?>
+
 
 <?php
  
@@ -19,3 +19,4 @@
 	 header('Location: 404error.php');
 }
  ?>
+ <?php include "scripts.php"; ?>
