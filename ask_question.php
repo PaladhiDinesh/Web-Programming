@@ -1,5 +1,6 @@
 <?php include "session.php"; ?>	
-
+<?php include "header.php"; ?>
+<?php include "navbar.php"; ?>	
 
 <?php
 	if ($USERID != "undefined"){
@@ -86,9 +87,9 @@
 		</div>
 	</div>
 </div>
-<?php include "header.php"; ?>
-<?php include "navbar.php"; ?>	
+
 <?php include "scripts.php"; ?>
+
 <script>
 	$(document).ready(function() {
 		$('#summernote').summernote({

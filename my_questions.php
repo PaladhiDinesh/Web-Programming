@@ -1,4 +1,6 @@
 <?php include "session.php"; ?>	
+<?php include "header.php"; ?>
+<?php include "navbar.php"; ?>	
 
 <h2 align="center"> My Questions</h2>
 <div class="container">
@@ -155,6 +157,5 @@
 		</div>
 	</div>
 </div>
-<?php include "header.php"; ?>
-<?php include "navbar.php"; ?>	
+
 <?php include "scripts.php"; ?>	
