@@ -1,7 +1,7 @@
 <?php include "session.php"; ?>	
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>	
-<?php include "scripts.php"; ?>	
+
 <?php 
 	if (isset($_POST['submit'])){
 		$newquestion = $_GET['ques_id'];
@@ -308,7 +308,7 @@
 	?>
 	<form class="form col-md-offset-1 col-md-6" method="post">
 	<?php 
-	echo $row['freeze'];
+	// echo $row['freeze'];
 	if ($row['freeze']==0){
 
 	?>
@@ -350,6 +350,7 @@
 			?>
 	</form>
 </div>
+<?php include "scripts.php"; ?>	
 <script>
     $(document).ready(function() {
     	$('.correct_ans').click(function () {
@@ -479,6 +480,7 @@
   			width: 700
 		});
 	});
+
 </script>
 
 <?php include "footer.php"; ?>	
