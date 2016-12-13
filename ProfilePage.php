@@ -13,7 +13,7 @@ Welcome to Answers Kart</h1><hr/>
 			
 		</h2>
 		<?php 
-	$namequery = "SELECT user_id from login_details where admin ='".$_GET['name']."'";
+	$namequery = "SELECT user_id,emailid,admin,checkgit from login_details where admin ='".$_GET['name']."'";
 	$nameresult = mysqli_query($connection,$namequery) or die("Failed to query database 123".mysql_error());
 	$new=$nameresult->num_rows;
 	if ($new==0){
@@ -94,8 +94,35 @@ Welcome to Answers Kart</h1><hr/>
 		if ($USERID == $dummy){ ?>
 		<h4>Upload a Profile Picture</h4>
 		<?php } ?>
-		<img width="200" height="200" src="images/<?php echo $_GET['name']?>"
-		onerror="this.src='images/default.png';" >
+		
+            <?php
+            
+              
+              if($row1["checkgit"]==1)
+              {
+            
+                echo "<img width='180' height='220' alt='abc' src='https://github.com/".$row1['admin'].".png' />";
+                  
+              }
+              else
+              {
+                $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $row1['emailid'] ) ) ) . "?d=" . urlencode( 'https://s24.postimg.org/a4bwqzpgl/default.png' );
+                  $source = "./images/".$row1['admin'];
+                  $source = trim($source);
+                  if(file_exists($source))
+                  {
+                     ?>
+                      <img width='180' height='220' alt='abc' src='images/<?php echo $row1['admin']; ?>' />
+                    <?php
+                  }
+                  else
+                  {
+                     ?>
+                      <img width='180' height='220' alt='abc' src='<?php echo $grav_url; ?>' / >
+                    <?php
+                  }  
+              }
+              ?>
 		<?php
 	if ($USERID == $dummy){ ?>
     <center><input type="file" name="fileToUpload" id="fileToUpload"></center>
@@ -183,7 +210,33 @@ if ($uploadOk == 0) {
 						<div class="col-md-4">
 							<p>
 								<a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1">
-									<img width="25" height="25" src="images/<?php echo $row['admin']?>" onerror="this.src='images/default.png';" >
+									<?php
+             
+              
+              if($row1["checkgit"]==1)
+              { 
+                echo "<img width='25' height='25' alt='abc' src='https://github.com/".$row1['admin'].".png' />";
+                
+              }
+              else
+              {
+                $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $row1['emailid'] ) ) ) . "?d=" . urlencode( 'https://s24.postimg.org/a4bwqzpgl/default.png' );
+              $source = "./images/".$row1['admin'];
+              $source = trim($source);
+              if(file_exists($source))
+              { 
+                 ?>
+                  <img width='25' height='25' alt='abc' src='./images/<?php echo $row1['admin']; ?>' />
+                <?php
+              }
+              else
+              {
+                 ?>
+                  <img width='25' height='25' alt='abc' src='<?php echo $grav_url; ?>' / >
+                <?php
+              }
+              }
+              ?>
 								</a>
 								<b><?php echo "Asked by ";?><a href="ProfilePage.php?name=<?php echo trim($row['admin']);?>&page=1"> <?php echo htmlentities($row['admin']) ?></a>
 									<?php 
