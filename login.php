@@ -56,7 +56,7 @@
 <?php include "header.php"; ?>
 <?php include "navbar.php"; ?>
 <title>ANSWERSKART- Login Page</title>
-<img src="download.jpg" style="width:1600px;height: 623px">
+<img src="download.jpg" style="width:1200px;height: 623px">
 <div style="margin-top:100px;" id="loginModal" class="modal show col-xs-offset-7 col-md-5" tabindex="-1" role="dialog" aria-hidden="true" align="center">
 	<div class="modal-dialog">
   		<div class="modal-content">

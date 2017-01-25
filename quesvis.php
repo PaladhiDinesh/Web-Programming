@@ -46,11 +46,11 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + width/2 + "," + height / 2 + ")");
 
-d3.csv("piechart", type, function(error, data1) {
+d3.csv("piechart", type, function(error, data) {
   if (error) throw error;
 
   var g = svg.selectAll(".arc")
-      .data(pie(data1))
+      .data(pie(data))
     .enter().append("g")
       .attr("class", "arc");
 
